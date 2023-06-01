@@ -47,16 +47,40 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChatForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChatForm.Designer.cs">
+      <DependentUpon>ChatForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="LoginUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LoginUC.Designer.cs">
+      <DependentUpon>LoginUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegisterUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="RegisterUC.Designer.cs">
+      <DependentUpon>RegisterUC.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="ChatForm.resx">
+      <DependentUpon>ChatForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoginUC.resx">
+      <DependentUpon>LoginUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -68,6 +92,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="RegisterUC.resx">
+      <DependentUpon>RegisterUC.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -83,6 +110,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\chatapp_logo-removebg-preview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\send-message.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

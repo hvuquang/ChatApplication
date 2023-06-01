@@ -9,3 +9,6 @@ C:\Users\HUY\Documents\GitHub\ChatApplication\ChatApplication-CSharp\obj\Debug\C
 C:\Users\HUY\Documents\GitHub\ChatApplication\ChatApplication-CSharp\obj\Debug\ChatApplication-CSharp.csproj.CoreCompileInputs.cache
 C:\Users\HUY\Documents\GitHub\ChatApplication\ChatApplication-CSharp\obj\Debug\ChatApplication-CSharp.exe
 C:\Users\HUY\Documents\GitHub\ChatApplication\ChatApplication-CSharp\obj\Debug\ChatApplication-CSharp.pdb
+C:\Users\HUY\Documents\GitHub\ChatApplication\ChatApplication-CSharp\obj\Debug\ChatApplication_CSharp.LoginUC.resources
+C:\Users\HUY\Documents\GitHub\ChatApplication\ChatApplication-CSharp\obj\Debug\ChatApplication_CSharp.RegisterUC.resources
+C:\Users\HUY\Documents\GitHub\ChatApplication\ChatApplication-CSharp\obj\Debug\ChatApplication_CSharp.ChatForm.resources
