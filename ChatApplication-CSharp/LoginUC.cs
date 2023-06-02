@@ -28,11 +28,12 @@ namespace ChatApplication_CSharp
                 while (reader.Read())
                 {
                     string username = reader.GetString(1);
-                    string password = reader.GetString(2); 
+                    string password = reader.GetString(2);
+                    int id = reader.GetInt32(0);
 
                     if(txtUsername.Text == username && txtPassword.Text == password)
                     {
-                        ChatForm chat = new ChatForm();
+                        ChatForm chat = new ChatForm(id);
                         chat.ShowDialog();
                     }
                 }
