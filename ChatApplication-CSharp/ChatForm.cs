@@ -84,7 +84,7 @@ namespace ChatApplication_CSharp
             DataTable messageTable = new DataTable();
 
             string connectionString = "Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
-            string query = "SELECT MessageText, SentTime FROM [Message] WHERE (SenderUsername = @senderId AND ReceiverUsername = @receiverId) OR (SenderUsername = @receiverId AND ReceiverUsername = @senderId) ORDER BY SentTime ASC";
+            string query = "SELECT * FROM [Message] WHERE (SenderUsername = @senderId AND ReceiverUsername = @receiverId) OR (SenderUsername = @receiverId AND ReceiverUsername = @senderId) ORDER BY SentTime ASC";
 
             try
             {
@@ -118,11 +118,22 @@ namespace ChatApplication_CSharp
 
             foreach (DataRow row in messageTable.Rows)
             {
-                string message = row["MessageText"].ToString();
-                DateTime sentTime = (DateTime)row["SentTime"];
-
-                Message messageControl = new Message(message,sentTime);
-                flowLayoutPanel1.Controls.Add(messageControl);
+                int senderId = int.Parse(row["SenderUsername"].ToString());
+                
+                if(senderId == id)
+                {
+                    string message = row["MessageText"].ToString();
+                    DateTime sentTime = (DateTime)row["SentTime"];
+                    Message messageControl = new Message(message, sentTime);
+                    flowLayoutPanel1.Controls.Add(messageControl);
+                }
+                else
+                {
+                    string message = row["MessageText"].ToString();
+                    DateTime sentTime = (DateTime)row["SentTime"];
+                    Message1 messageControl = new Message1(message, sentTime);
+                    flowLayoutPanel1.Controls.Add(messageControl);
+                }
             }
         }
         private void ChatForm_Load(object sender, EventArgs e)

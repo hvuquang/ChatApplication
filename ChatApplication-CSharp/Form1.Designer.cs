@@ -44,7 +44,7 @@
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(84)))), ((int)(((byte)(163)))));
             this.panel1.Controls.Add(this.label2);
             this.panel1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.panel1.Location = new System.Drawing.Point(1, 1);
+            this.panel1.Location = new System.Drawing.Point(0, 73);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(230, 72);
             this.panel1.TabIndex = 0;
@@ -53,7 +53,7 @@
             // 
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(3, 23);
+            this.label2.Location = new System.Drawing.Point(1, 23);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(224, 30);
             this.label2.TabIndex = 1;
@@ -65,7 +65,7 @@
             // 
             this.panel2.Controls.Add(this.label1);
             this.panel2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.panel2.Location = new System.Drawing.Point(232, 1);
+            this.panel2.Location = new System.Drawing.Point(233, 73);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(230, 72);
             this.panel2.TabIndex = 1;
@@ -84,17 +84,18 @@
             // 
             // panel3
             // 
-            this.panel3.Location = new System.Drawing.Point(1, 254);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel3.Location = new System.Drawing.Point(0, 345);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(462, 572);
+            this.panel3.Size = new System.Drawing.Size(463, 572);
             this.panel3.TabIndex = 3;
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::ChatApplication_CSharp.Properties.Resources.chatapp_logo_removebg_preview;
-            this.pictureBox1.Location = new System.Drawing.Point(92, 79);
+            this.pictureBox1.Location = new System.Drawing.Point(116, 151);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(283, 156);
+            this.pictureBox1.Size = new System.Drawing.Size(221, 142);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
@@ -104,7 +105,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(463, 846);
+            this.ClientSize = new System.Drawing.Size(463, 917);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.panel2);

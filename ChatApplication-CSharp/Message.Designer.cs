@@ -36,21 +36,23 @@
             // 
             this.label1.BackColor = System.Drawing.Color.Teal;
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(180, 0);
+            this.label1.Location = new System.Drawing.Point(187, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(902, 78);
+            this.label1.Padding = new System.Windows.Forms.Padding(15);
+            this.label1.Size = new System.Drawing.Size(760, 94);
             this.label1.TabIndex = 0;
             this.label1.Text = "label1";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lbTime
             // 
-            this.lbTime.AutoSize = true;
-            this.lbTime.Location = new System.Drawing.Point(13, 31);
+            this.lbTime.Location = new System.Drawing.Point(3, 0);
             this.lbTime.Name = "lbTime";
-            this.lbTime.Size = new System.Drawing.Size(44, 16);
+            this.lbTime.Size = new System.Drawing.Size(186, 94);
             this.lbTime.TabIndex = 1;
             this.lbTime.Text = "label2";
+            this.lbTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbTime.Visible = false;
             // 
             // Message
             // 
@@ -59,11 +61,11 @@
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.lbTime);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(170, 3, 3, 3);
             this.Name = "Message";
-            this.Size = new System.Drawing.Size(1177, 78);
+            this.Size = new System.Drawing.Size(950, 94);
             this.Load += new System.EventHandler(this.Message_Load);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

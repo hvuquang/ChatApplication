@@ -71,6 +71,12 @@
     <Compile Include="Message.Designer.cs">
       <DependentUpon>Message.cs</DependentUpon>
     </Compile>
+    <Compile Include="Message1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Message1.Designer.cs">
+      <DependentUpon>Message1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegisterUC.cs">
@@ -90,6 +96,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Message.resx">
       <DependentUpon>Message.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Message1.resx">
+      <DependentUpon>Message1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -122,6 +131,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\send-message.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\avt.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
