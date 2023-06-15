@@ -191,5 +191,11 @@ namespace ChatApplication_CSharp
             connection.Close();
             LoadLatestMessages();
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            addGroup add = new addGroup();
+            add.ShowDialog();
+        }
     }
 }

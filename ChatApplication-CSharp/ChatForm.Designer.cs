@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button5 = new System.Windows.Forms.Button();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.label2 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -37,6 +38,9 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.txtMessage = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
@@ -50,6 +54,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(91)))), ((int)(((byte)(61)))));
+            this.panel1.Controls.Add(this.button5);
             this.panel1.Controls.Add(this.dataGridView2);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.dataGridView1);
@@ -60,6 +65,19 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(237, 799);
             this.panel1.TabIndex = 0;
+            // 
+            // button5
+            // 
+            this.button5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(84)))), ((int)(((byte)(163)))));
+            this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button5.ForeColor = System.Drawing.Color.White;
+            this.button5.Location = new System.Drawing.Point(102, 441);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(58, 31);
+            this.button5.TabIndex = 4;
+            this.button5.Text = "+";
+            this.button5.UseVisualStyleBackColor = false;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // dataGridView2
             // 
@@ -80,9 +98,9 @@
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(9)))), ((int)(((byte)(73)))));
             this.label2.Location = new System.Drawing.Point(12, 443);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(71, 25);
+            this.label2.Size = new System.Drawing.Size(68, 25);
             this.label2.TabIndex = 2;
-            this.label2.Text = "Group";
+            this.label2.Text = "Nhóm";
             // 
             // dataGridView1
             // 
@@ -104,9 +122,9 @@
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(9)))), ((int)(((byte)(73)))));
             this.label1.Location = new System.Drawing.Point(12, 128);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(106, 25);
+            this.label1.Size = new System.Drawing.Size(187, 25);
             this.label1.TabIndex = 1;
-            this.label1.Text = "List friend";
+            this.label1.Text = "Danh sách bạn bè";
             // 
             // pictureBox1
             // 
@@ -140,6 +158,9 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(91)))), ((int)(((byte)(61)))));
+            this.panel3.Controls.Add(this.button4);
+            this.panel3.Controls.Add(this.button3);
+            this.panel3.Controls.Add(this.button2);
             this.panel3.Controls.Add(this.button1);
             this.panel3.Controls.Add(this.txtMessage);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -147,6 +168,45 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1177, 70);
             this.panel3.TabIndex = 2;
+            // 
+            // button4
+            // 
+            this.button4.BackgroundImage = global::ChatApplication_CSharp.Properties.Resources.sticker;
+            this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button4.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button4.FlatAppearance.BorderSize = 0;
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button4.Location = new System.Drawing.Point(237, 17);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(95, 38);
+            this.button4.TabIndex = 4;
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            this.button3.BackgroundImage = global::ChatApplication_CSharp.Properties.Resources.photo_camera_interface_symbol_for_button;
+            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button3.FlatAppearance.BorderSize = 0;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Location = new System.Drawing.Point(16, 17);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(95, 38);
+            this.button3.TabIndex = 3;
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.BackgroundImage = global::ChatApplication_CSharp.Properties.Resources.attach_paperclip_symbol;
+            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Location = new System.Drawing.Point(117, 17);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(95, 38);
+            this.button2.TabIndex = 2;
+            this.button2.UseVisualStyleBackColor = true;
             // 
             // button1
             // 
@@ -164,6 +224,7 @@
             // 
             // txtMessage
             // 
+            this.txtMessage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMessage.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(9)))), ((int)(((byte)(73)))));
             this.txtMessage.Location = new System.Drawing.Point(338, 17);
@@ -209,5 +270,9 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox txtMessage;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button4;
     }
 }

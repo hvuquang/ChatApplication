@@ -51,7 +51,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(396, 49);
             this.button1.TabIndex = 9;
-            this.button1.Text = "Register";
+            this.button1.Text = "Đăng ký";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -93,9 +93,9 @@
             this.label1.ForeColor = System.Drawing.SystemColors.ActiveBorder;
             this.label1.Location = new System.Drawing.Point(31, 17);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(110, 25);
+            this.label1.Size = new System.Drawing.Size(108, 25);
             this.label1.TabIndex = 5;
-            this.label1.Text = "Username";
+            this.label1.Text = "Tài khoản";
             // 
             // txtPass
             // 
@@ -115,9 +115,9 @@
             this.label3.ForeColor = System.Drawing.SystemColors.ActiveBorder;
             this.label3.Location = new System.Drawing.Point(31, 205);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(106, 25);
+            this.label3.Size = new System.Drawing.Size(101, 25);
             this.label3.TabIndex = 10;
-            this.label3.Text = "Password";
+            this.label3.Text = "Mật khẩu";
             // 
             // txtConfirm
             // 
@@ -137,9 +137,9 @@
             this.label4.ForeColor = System.Drawing.SystemColors.ActiveBorder;
             this.label4.Location = new System.Drawing.Point(31, 304);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(185, 25);
+            this.label4.Size = new System.Drawing.Size(198, 25);
             this.label4.TabIndex = 12;
-            this.label4.Text = "Confirm password";
+            this.label4.Text = "Xác nhận mật khẩu";
             // 
             // RegisterUC
             // 

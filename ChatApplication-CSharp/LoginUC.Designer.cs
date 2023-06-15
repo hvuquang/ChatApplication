@@ -44,9 +44,9 @@
             this.label1.ForeColor = System.Drawing.SystemColors.ActiveBorder;
             this.label1.Location = new System.Drawing.Point(26, 20);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(110, 25);
+            this.label1.Size = new System.Drawing.Size(108, 25);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Username";
+            this.label1.Text = "Tài khoản";
             // 
             // txtUsername
             // 
@@ -76,9 +76,9 @@
             this.label2.ForeColor = System.Drawing.SystemColors.ActiveBorder;
             this.label2.Location = new System.Drawing.Point(26, 112);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(106, 25);
+            this.label2.Size = new System.Drawing.Size(101, 25);
             this.label2.TabIndex = 2;
-            this.label2.Text = "Password";
+            this.label2.Text = "Mật khẩu";
             // 
             // button1
             // 
@@ -92,7 +92,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(396, 49);
             this.button1.TabIndex = 4;
-            this.button1.Text = "Login";
+            this.button1.Text = "Đăng nhập";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 

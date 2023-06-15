@@ -63,6 +63,16 @@ namespace ChatApplication_CSharp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap attach_paperclip_symbol {
+            get {
+                object obj = ResourceManager.GetObject("attach-paperclip-symbol", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap avt {
             get {
                 object obj = ResourceManager.GetObject("avt", resourceCulture);
@@ -93,9 +103,39 @@ namespace ChatApplication_CSharp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap flamingo {
+            get {
+                object obj = ResourceManager.GetObject("flamingo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap photo_camera_interface_symbol_for_button {
+            get {
+                object obj = ResourceManager.GetObject("photo-camera-interface-symbol-for-button", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap send_message {
             get {
                 object obj = ResourceManager.GetObject("send-message", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap sticker {
+            get {
+                object obj = ResourceManager.GetObject("sticker", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

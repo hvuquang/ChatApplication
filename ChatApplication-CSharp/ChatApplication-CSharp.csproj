@@ -47,6 +47,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="addGroup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="addGroup.Designer.cs">
+      <DependentUpon>addGroup.cs</DependentUpon>
+    </Compile>
     <Compile Include="ChatForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,6 +91,9 @@
     <Compile Include="RegisterUC.Designer.cs">
       <DependentUpon>RegisterUC.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="addGroup.resx">
+      <DependentUpon>addGroup.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ChatForm.resx">
       <DependentUpon>ChatForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -134,6 +143,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\avt.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\attach-paperclip-symbol.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\photo-camera-interface-symbol-for-button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sticker.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\flamingo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
