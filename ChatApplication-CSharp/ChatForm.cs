@@ -313,5 +313,18 @@ namespace ChatApplication_CSharp
                 txtMessage.Text = "";
             }
         }
+
+        private void btnChangeScreen_Click(object sender, EventArgs e)
+        {
+            //flowLayoutPanel1.BackColor = Color.Black;
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.InitialDirectory = "C:\\";
+            openFileDialog.Filter = "Image Files (*.jpg; *.png; *.gif)|*.jpg;*.png;*.gif";
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string filePath = openFileDialog.FileName;
+                flowLayoutPanel1.BackgroundImage = Image.FromFile(filePath);
+            }
+        }
     }
 }

@@ -36,6 +36,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.button4 = new System.Windows.Forms.Button();
@@ -43,11 +44,13 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.txtMessage = new System.Windows.Forms.TextBox();
+            this.btnChangeScreen = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -70,6 +73,7 @@
             // button5
             // 
             this.button5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(84)))), ((int)(((byte)(163)))));
+            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button5.ForeColor = System.Drawing.Color.White;
             this.button5.Location = new System.Drawing.Point(76, 358);
@@ -147,6 +151,7 @@
             // 
             this.panel2.AutoScroll = true;
             this.panel2.Controls.Add(this.flowLayoutPanel1);
+            this.panel2.Controls.Add(this.panel4);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(178, 0);
             this.panel2.Margin = new System.Windows.Forms.Padding(2);
@@ -154,14 +159,23 @@
             this.panel2.Size = new System.Drawing.Size(882, 649);
             this.panel2.TabIndex = 1;
             // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.btnChangeScreen);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel4.Location = new System.Drawing.Point(0, 0);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(882, 649);
+            this.panel4.TabIndex = 1;
+            // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.AutoScroll = true;
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 102);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(882, 587);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(882, 486);
             this.flowLayoutPanel1.TabIndex = 0;
             // 
             // panel3
@@ -251,6 +265,16 @@
             this.txtMessage.TabIndex = 0;
             this.txtMessage.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtMessage_KeyDown);
             // 
+            // btnChangeScreen
+            // 
+            this.btnChangeScreen.Location = new System.Drawing.Point(778, 46);
+            this.btnChangeScreen.Name = "btnChangeScreen";
+            this.btnChangeScreen.Size = new System.Drawing.Size(75, 23);
+            this.btnChangeScreen.TabIndex = 0;
+            this.btnChangeScreen.Text = "Screen";
+            this.btnChangeScreen.UseVisualStyleBackColor = true;
+            this.btnChangeScreen.Click += new System.EventHandler(this.btnChangeScreen_Click);
+            // 
             // ChatForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -272,6 +296,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel2.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.ResumeLayout(false);
@@ -295,5 +320,7 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Button btnChangeScreen;
     }
 }
