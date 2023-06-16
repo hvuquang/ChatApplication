@@ -1,0 +1,17 @@
+C:\Users\HUY\Documents\GitHub\ChatApplication\ChatApplication-CSharp\bin\Debug\ChatApplication-CSharp.exe.config
+C:\Users\HUY\Documents\GitHub\ChatApplication\ChatApplication-CSharp\bin\Debug\ChatApplication-CSharp.exe
+C:\Users\HUY\Documents\GitHub\ChatApplication\ChatApplication-CSharp\bin\Debug\ChatApplication-CSharp.pdb
+C:\Users\HUY\Documents\GitHub\ChatApplication\ChatApplication-CSharp\obj\Debug\ChatApplication-CSharp.csproj.AssemblyReference.cache
+C:\Users\HUY\Documents\GitHub\ChatApplication\ChatApplication-CSharp\obj\Debug\ChatApplication-CSharp.csproj.SuggestedBindingRedirects.cache
+C:\Users\HUY\Documents\GitHub\ChatApplication\ChatApplication-CSharp\obj\Debug\ChatApplication_CSharp.Form1.resources
+C:\Users\HUY\Documents\GitHub\ChatApplication\ChatApplication-CSharp\obj\Debug\ChatApplication_CSharp.Properties.Resources.resources
+C:\Users\HUY\Documents\GitHub\ChatApplication\ChatApplication-CSharp\obj\Debug\ChatApplication-CSharp.csproj.GenerateResource.cache
+C:\Users\HUY\Documents\GitHub\ChatApplication\ChatApplication-CSharp\obj\Debug\ChatApplication-CSharp.csproj.CoreCompileInputs.cache
+C:\Users\HUY\Documents\GitHub\ChatApplication\ChatApplication-CSharp\obj\Debug\ChatApplication-CSharp.exe
+C:\Users\HUY\Documents\GitHub\ChatApplication\ChatApplication-CSharp\obj\Debug\ChatApplication-CSharp.pdb
+C:\Users\HUY\Documents\GitHub\ChatApplication\ChatApplication-CSharp\obj\Debug\ChatApplication_CSharp.LoginUC.resources
+C:\Users\HUY\Documents\GitHub\ChatApplication\ChatApplication-CSharp\obj\Debug\ChatApplication_CSharp.RegisterUC.resources
+C:\Users\HUY\Documents\GitHub\ChatApplication\ChatApplication-CSharp\obj\Debug\ChatApplication_CSharp.ChatForm.resources
+C:\Users\HUY\Documents\GitHub\ChatApplication\ChatApplication-CSharp\obj\Debug\ChatApplication_CSharp.Message.resources
+C:\Users\HUY\Documents\GitHub\ChatApplication\ChatApplication-CSharp\obj\Debug\ChatApplication_CSharp.Message1.resources
+C:\Users\HUY\Documents\GitHub\ChatApplication\ChatApplication-CSharp\obj\Debug\ChatApplication_CSharp.addGroup.resources
