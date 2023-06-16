@@ -36,19 +36,21 @@
             // 
             this.label1.BackColor = System.Drawing.Color.Teal;
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(187, 0);
+            this.label1.Location = new System.Drawing.Point(146, 0);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Padding = new System.Windows.Forms.Padding(15);
-            this.label1.Size = new System.Drawing.Size(760, 94);
+            this.label1.Padding = new System.Windows.Forms.Padding(11, 12, 11, 12);
+            this.label1.Size = new System.Drawing.Size(566, 76);
             this.label1.TabIndex = 0;
             this.label1.Text = "label1";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lbTime
             // 
-            this.lbTime.Location = new System.Drawing.Point(3, 0);
+            this.lbTime.Location = new System.Drawing.Point(2, 0);
+            this.lbTime.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbTime.Name = "lbTime";
-            this.lbTime.Size = new System.Drawing.Size(186, 94);
+            this.lbTime.Size = new System.Drawing.Size(140, 76);
             this.lbTime.TabIndex = 1;
             this.lbTime.Text = "label2";
             this.lbTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -56,14 +58,14 @@
             // 
             // Message
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.lbTime);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(170, 3, 3, 3);
+            this.Margin = new System.Windows.Forms.Padding(128, 2, 2, 2);
             this.Name = "Message";
-            this.Size = new System.Drawing.Size(950, 94);
+            this.Size = new System.Drawing.Size(712, 76);
             this.Load += new System.EventHandler(this.Message_Load);
             this.ResumeLayout(false);
 
