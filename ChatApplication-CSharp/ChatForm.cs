@@ -228,6 +228,8 @@ namespace ChatApplication_CSharp
 
             connection.Close();
             LoadLatestMessages();
+
+            txtMessage.Text = "";
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -269,6 +271,46 @@ namespace ChatApplication_CSharp
 
                 connection.Close();
                 LoadLatestMessages();
+            }
+        }
+
+        private void button1_KeyDown(object sender, KeyEventArgs e)
+        {
+            
+
+        }
+
+        private void button1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void ChatForm_KeyDown(object sender, KeyEventArgs e)
+        {
+
+        }
+
+        private void txtMessage_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                //string connectionString = "Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
+                string connectionString = "Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
+                SqlConnection connection = new SqlConnection(connectionString);
+                connection.Open();
+                string query = "INSERT INTO [Message] (SenderUsername, ReceiverUsername, MessageText, SentTime) VALUES (@sender, @receiver, @message, @sentTime)";
+                SqlCommand command = new SqlCommand(query, connection);
+
+                command.Parameters.AddWithValue("@sender", id);
+                command.Parameters.AddWithValue("@receiver", receiver);
+                command.Parameters.AddWithValue("@message", txtMessage.Text);
+                command.Parameters.AddWithValue("@sentTime", DateTime.Now);
+                command.ExecuteNonQuery();
+
+                connection.Close();
+                LoadLatestMessages();
+
+                txtMessage.Text = "";
             }
         }
     }
