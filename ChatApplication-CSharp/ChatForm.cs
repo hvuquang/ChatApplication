@@ -19,6 +19,8 @@ namespace ChatApplication_CSharp
         private Timer timer;
         private DataTable lastMessageTable;
         private int pollingInterval = 2000;
+        private int countDown = 120;
+
         public ChatForm()
         {
             InitializeComponent();
@@ -137,6 +139,10 @@ namespace ChatApplication_CSharp
                 
                 if(senderId == id)
                 {
+                        string senttime = row["SentTime"].ToString();
+                        ChatTime chatTime = new ChatTime(senttime);
+                        flowLayoutPanel1.Controls.Add(chatTime);
+
                     if (row["img"].ToString() != "")
                     {
                         ImageMessage imageMessage = new ImageMessage();
@@ -155,6 +161,9 @@ namespace ChatApplication_CSharp
                 }
                 else
                 {
+                    string senttime = row["SentTime"].ToString();
+                    ChatTime chatTime = new ChatTime(senttime);
+                    flowLayoutPanel1.Controls.Add(chatTime);
                     if (row["img"].ToString() != "")
                     {
                         ImageMessage1 imageMessage = new ImageMessage1();
@@ -295,6 +304,9 @@ namespace ChatApplication_CSharp
             if (e.KeyCode == Keys.Enter)
             {
                 //string connectionString = "Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
+                //timer for sent time
+                timer1.Start();
+                
                 string connectionString = "Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
                 SqlConnection connection = new SqlConnection(connectionString);
                 connection.Open();
@@ -324,6 +336,16 @@ namespace ChatApplication_CSharp
             {
                 string filePath = openFileDialog.FileName;
                 flowLayoutPanel1.BackgroundImage = Image.FromFile(filePath);
+            }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            countDown--;
+            //MessageBox.Show("Done");
+            if (countDown <= 0)
+            {
+                timer1.Stop();
             }
         }
     }
