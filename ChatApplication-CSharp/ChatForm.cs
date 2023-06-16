@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,7 +42,8 @@ namespace ChatApplication_CSharp
         {
             DataTable userTable = new DataTable();
 
-            string connectionString = "Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
+            //string connectionString = "Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
+            string connectionString = "Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
             string query = "SELECT username,id FROM userTab";
 
             try
@@ -83,7 +85,8 @@ namespace ChatApplication_CSharp
         {
             DataTable messageTable = new DataTable();
 
-            string connectionString = "Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
+            //string connectionString = "Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
+            string connectionString = "Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
             string query = "SELECT * FROM [Message] WHERE (SenderUsername = @senderId AND ReceiverUsername = @receiverId) OR (SenderUsername = @receiverId AND ReceiverUsername = @senderId) ORDER BY SentTime ASC";
 
             try
@@ -112,9 +115,21 @@ namespace ChatApplication_CSharp
             return messageTable;
         }
 
+        public Image ConvertByteArrayToImage(byte[] byteArray)
+        {
+            using (MemoryStream memoryStream = new MemoryStream(byteArray))
+            {
+                Image image = Image.FromStream(memoryStream);
+                return image;
+            }
+        }
+
         private void DisplayMessagesInFlowLayoutPanel(DataTable messageTable)
         {
             flowLayoutPanel1.Controls.Clear();
+
+            byte[] imageData = null;
+            Image image;
 
             foreach (DataRow row in messageTable.Rows)
             {
@@ -122,17 +137,39 @@ namespace ChatApplication_CSharp
                 
                 if(senderId == id)
                 {
-                    string message = row["MessageText"].ToString();
-                    DateTime sentTime = (DateTime)row["SentTime"];
-                    Message messageControl = new Message(message, sentTime);
-                    flowLayoutPanel1.Controls.Add(messageControl);
+                    if (row["img"].ToString() != "")
+                    {
+                        ImageMessage imageMessage = new ImageMessage();
+                        imageData = (byte[])row["img"];
+                        image = ConvertByteArrayToImage(imageData);
+                        imageMessage.pictureBox1.Image = image;
+                        flowLayoutPanel1.Controls.Add(imageMessage);
+                    }
+                    if (row["MessageText"].ToString() != "")
+                    {
+                        string message = row["MessageText"].ToString();
+                        DateTime sentTime = (DateTime)row["SentTime"];
+                        Message messageControl = new Message(message, sentTime);
+                        flowLayoutPanel1.Controls.Add(messageControl);
+                    }
                 }
                 else
                 {
-                    string message = row["MessageText"].ToString();
-                    DateTime sentTime = (DateTime)row["SentTime"];
-                    Message1 messageControl = new Message1(message, sentTime);
-                    flowLayoutPanel1.Controls.Add(messageControl);
+                    if (row["img"].ToString() != "")
+                    {
+                        ImageMessage1 imageMessage = new ImageMessage1();
+                        imageData = (byte[])row["img"];
+                        image = ConvertByteArrayToImage(imageData);
+                        imageMessage.pictureBox1.Image = image;
+                        flowLayoutPanel1.Controls.Add(imageMessage);
+                    }
+                    if (row["MessageText"].ToString() != "")
+                    {
+                        string message = row["MessageText"].ToString();
+                        DateTime sentTime = (DateTime)row["SentTime"];
+                        Message1 messageControl = new Message1(message, sentTime);
+                        flowLayoutPanel1.Controls.Add(messageControl);
+                    }
                 }
             }
         }
@@ -176,7 +213,8 @@ namespace ChatApplication_CSharp
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string connectionString = "Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
+            //string connectionString = "Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
+            string connectionString = "Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
             SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
             string query = "INSERT INTO [Message] (SenderUsername, ReceiverUsername, MessageText, SentTime) VALUES (@sender, @receiver, @message, @sentTime)";
@@ -190,12 +228,90 @@ namespace ChatApplication_CSharp
 
             connection.Close();
             LoadLatestMessages();
+
+            txtMessage.Text = "";
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
             addGroup add = new addGroup();
             add.ShowDialog();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+
+            // Set the initial directory and filter for the file dialog
+            openFileDialog.InitialDirectory = "C:\\";
+            openFileDialog.Filter = "Image Files (*.jpg; *.png; *.gif)|*.jpg;*.png;*.gif";
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                // Retrieve the selected file path
+                string filePath = openFileDialog.FileName;
+
+                // Process the file or save the path to the database
+                // ...
+                //string connectionString = "Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
+                string connectionString = "Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
+                SqlConnection connection = new SqlConnection(connectionString);
+                connection.Open();
+                string query = "INSERT INTO [Message] (SenderUsername, ReceiverUsername, img, SentTime) VALUES (@sender, @receiver, @img, @sentTime)";
+                SqlCommand command = new SqlCommand(query, connection);
+
+                // Read the file as binary data
+                byte[] binaryData = File.ReadAllBytes(filePath);
+
+                command.Parameters.AddWithValue("@sender", id);
+                command.Parameters.AddWithValue("@receiver", receiver);
+                command.Parameters.AddWithValue("@img", binaryData);
+                command.Parameters.AddWithValue("@sentTime", DateTime.Now);
+                command.ExecuteNonQuery();
+
+                connection.Close();
+                LoadLatestMessages();
+            }
+        }
+
+        private void button1_KeyDown(object sender, KeyEventArgs e)
+        {
+            
+
+        }
+
+        private void button1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void ChatForm_KeyDown(object sender, KeyEventArgs e)
+        {
+
+        }
+
+        private void txtMessage_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                //string connectionString = "Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
+                string connectionString = "Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
+                SqlConnection connection = new SqlConnection(connectionString);
+                connection.Open();
+                string query = "INSERT INTO [Message] (SenderUsername, ReceiverUsername, MessageText, SentTime) VALUES (@sender, @receiver, @message, @sentTime)";
+                SqlCommand command = new SqlCommand(query, connection);
+
+                command.Parameters.AddWithValue("@sender", id);
+                command.Parameters.AddWithValue("@receiver", receiver);
+                command.Parameters.AddWithValue("@message", txtMessage.Text);
+                command.Parameters.AddWithValue("@sentTime", DateTime.Now);
+                command.ExecuteNonQuery();
+
+                connection.Close();
+                LoadLatestMessages();
+
+                txtMessage.Text = "";
+            }
         }
     }
 }
