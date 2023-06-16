@@ -140,38 +140,36 @@ namespace ChatApplication_CSharp
                     if (row["img"].ToString() != "")
                     {
                         ImageMessage imageMessage = new ImageMessage();
-                        imageMessage.BackColor = Color.Red;
                         imageData = (byte[])row["img"];
                         image = ConvertByteArrayToImage(imageData);
                         imageMessage.pictureBox1.Image = image;
                         flowLayoutPanel1.Controls.Add(imageMessage);
                     }
-
-                    string message = row["MessageText"].ToString();
-
-                    //byte[] imageData = Encoding.UTF8.GetBytes(row["img"].ToString());
-                    //convertIntoImage(imageData);
-
-                    DateTime sentTime = (DateTime)row["SentTime"];
-                    Message messageControl = new Message(message, sentTime);
-                    flowLayoutPanel1.Controls.Add(messageControl);
+                    if (row["MessageText"].ToString() != "")
+                    {
+                        string message = row["MessageText"].ToString();
+                        DateTime sentTime = (DateTime)row["SentTime"];
+                        Message messageControl = new Message(message, sentTime);
+                        flowLayoutPanel1.Controls.Add(messageControl);
+                    }
                 }
                 else
                 {
                     if (row["img"].ToString() != "")
                     {
-                        ImageMessage imageMessage = new ImageMessage();
-                        imageMessage.BackColor = Color.Red;
+                        ImageMessage1 imageMessage = new ImageMessage1();
                         imageData = (byte[])row["img"];
                         image = ConvertByteArrayToImage(imageData);
                         imageMessage.pictureBox1.Image = image;
                         flowLayoutPanel1.Controls.Add(imageMessage);
                     }
-
-                    string message = row["MessageText"].ToString();
-                    DateTime sentTime = (DateTime)row["SentTime"];
-                    Message1 messageControl = new Message1(message, sentTime);
-                    flowLayoutPanel1.Controls.Add(messageControl);
+                    if (row["MessageText"].ToString() != "")
+                    {
+                        string message = row["MessageText"].ToString();
+                        DateTime sentTime = (DateTime)row["SentTime"];
+                        Message1 messageControl = new Message1(message, sentTime);
+                        flowLayoutPanel1.Controls.Add(messageControl);
+                    }
                 }
             }
         }
