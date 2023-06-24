@@ -44,8 +44,8 @@ namespace ChatApplication_CSharp
         {
             DataTable userTable = new DataTable();
 
-            //string connectionString = "Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
-            string connectionString = "Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
+            string connectionString = "Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
+            //string connectionString = "Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
             string query = "SELECT username,id FROM userTab";
 
             try
@@ -68,6 +68,34 @@ namespace ChatApplication_CSharp
             return userTable;
         }
 
+        private DataTable GetAllGroups()
+        {
+            DataTable groupTable = new DataTable();
+
+            string connectionString = "Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
+            //string connectionString = "Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
+            string query = "SELECT * FROM [Group]";
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
+                    {
+                        adapter.Fill(groupTable);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Đã xảy ra lỗi: " + ex.Message);
+            }
+
+            return groupTable;
+        }
+
         private void DisplayUsersInDataGridView()
         {
             DataTable userTable = GetAllUsers();
@@ -83,12 +111,32 @@ namespace ChatApplication_CSharp
             dataGridView1.Columns["id"].Visible = false;
         }
 
+        private void DisplayGroupsInDataGridView()
+        {
+            DataTable groupTable = GetAllGroups();
+            dataGridView2.DataSource = groupTable;
+            dataGridView2.ColumnHeadersVisible = false;
+            dataGridView2.RowHeadersVisible = false;
+            dataGridView2.CellBorderStyle = DataGridViewCellBorderStyle.None;
+            dataGridView2.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView2.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView2.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dataGridView2.DefaultCellStyle.BackColor = Color.FromArgb(249, 91, 61);
+            dataGridView2.Columns["id_nhom"].Visible = false;
+            dataGridView2.Columns["id_nguoi_tao"].Visible = false;
+            dataGridView2.Columns["id_thanh_vien"].Visible = false;
+            dataGridView2.ClearSelection();
+            dataGridView2.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView2.AllowUserToAddRows = false;
+        }
+
         private DataTable GetAllMessages(int senderId, int receiverId)
         {
             DataTable messageTable = new DataTable();
 
-            //string connectionString = "Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
-            string connectionString = "Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
+            string connectionString = "Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
+            //string connectionString = "Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
             string query = "SELECT * FROM [Message] WHERE (SenderUsername = @senderId AND ReceiverUsername = @receiverId) OR (SenderUsername = @receiverId AND ReceiverUsername = @senderId) ORDER BY SentTime ASC";
 
             try
@@ -185,6 +233,7 @@ namespace ChatApplication_CSharp
         private void ChatForm_Load(object sender, EventArgs e)
         {
             DisplayUsersInDataGridView();
+            DisplayGroupsInDataGridView();
         }
 
         private void LoadLatestMessages()
@@ -222,8 +271,8 @@ namespace ChatApplication_CSharp
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //string connectionString = "Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
-            string connectionString = "Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
+            string connectionString = "Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
+            //string connectionString = "Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
             SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
             string query = "INSERT INTO [Message] (SenderUsername, ReceiverUsername, MessageText, SentTime) VALUES (@sender, @receiver, @message, @sentTime)";
@@ -243,7 +292,7 @@ namespace ChatApplication_CSharp
 
         private void button5_Click(object sender, EventArgs e)
         {
-            addGroup add = new addGroup();
+            addGroup add = new addGroup(id);
             add.ShowDialog();
         }
 
@@ -262,8 +311,8 @@ namespace ChatApplication_CSharp
 
                 // Process the file or save the path to the database
                 // ...
-                //string connectionString = "Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
-                string connectionString = "Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
+                string connectionString = "Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
+                //string connectionString = "Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
                 SqlConnection connection = new SqlConnection(connectionString);
                 connection.Open();
                 string query = "INSERT INTO [Message] (SenderUsername, ReceiverUsername, img, SentTime) VALUES (@sender, @receiver, @img, @sentTime)";
@@ -303,11 +352,11 @@ namespace ChatApplication_CSharp
         {
             if (e.KeyCode == Keys.Enter)
             {
-                //string connectionString = "Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
+                string connectionString = "Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
                 //timer for sent time
                 timer1.Start();
                 
-                string connectionString = "Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
+                //string connectionString = "Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
                 SqlConnection connection = new SqlConnection(connectionString);
                 connection.Open();
                 string query = "INSERT INTO [Message] (SenderUsername, ReceiverUsername, MessageText, SentTime) VALUES (@sender, @receiver, @message, @sentTime)";
@@ -347,6 +396,32 @@ namespace ChatApplication_CSharp
             {
                 timer1.Stop();
             }
+        }
+
+        private void dataGridView2_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dataGridView2.Columns[e.ColumnIndex].Name == "hinh_anh" && e.RowIndex >= 0)
+            {
+                if (e.Value != null && e.Value is Image)
+                {
+                    Image originalImage = (Image)e.Value;
+                    int desiredWidth = 50;
+                    int desiredHeight = 50;
+
+                    Image resizedImage = ResizeImage(originalImage, desiredWidth, desiredHeight);
+                    e.Value = resizedImage;
+                }
+            }
+        }
+        private Image ResizeImage(Image image, int width, int height)
+        {
+            Bitmap resizedImage = new Bitmap(width, height);
+            using (Graphics graphics = Graphics.FromImage(resizedImage))
+            {
+                graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                graphics.DrawImage(image, 0, 0, width, height);
+            }
+            return resizedImage;
         }
     }
 }

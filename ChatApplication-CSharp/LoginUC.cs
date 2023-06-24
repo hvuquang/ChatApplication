@@ -20,8 +20,8 @@ namespace ChatApplication_CSharp
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //SqlConnection connection = new SqlConnection("Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True");
-            SqlConnection connection = new SqlConnection("Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True");
+            SqlConnection connection = new SqlConnection("Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True");
+            //SqlConnection connection = new SqlConnection("Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True");
             connection.Open();
             SqlCommand cmd = new SqlCommand("select * from [userTab]", connection);
             using (SqlDataReader reader = cmd.ExecuteReader())
