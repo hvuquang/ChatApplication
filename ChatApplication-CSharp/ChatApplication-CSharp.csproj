@@ -59,11 +59,29 @@
     <Compile Include="ChatForm.Designer.cs">
       <DependentUpon>ChatForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ChatTime.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ChatTime.Designer.cs">
+      <DependentUpon>ChatTime.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ImageMessage1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ImageMessage1.Designer.cs">
+      <DependentUpon>ImageMessage1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ImageMessage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ImageMessage.Designer.cs">
+      <DependentUpon>ImageMessage.cs</DependentUpon>
     </Compile>
     <Compile Include="LoginUC.cs">
       <SubType>UserControl</SubType>
@@ -97,8 +115,17 @@
     <EmbeddedResource Include="ChatForm.resx">
       <DependentUpon>ChatForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ChatTime.resx">
+      <DependentUpon>ChatTime.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImageMessage1.resx">
+      <DependentUpon>ImageMessage1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImageMessage.resx">
+      <DependentUpon>ImageMessage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginUC.resx">
       <DependentUpon>LoginUC.cs</DependentUpon>
