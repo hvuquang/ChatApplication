@@ -20,6 +20,8 @@ namespace ChatApplication_CSharp
         private DataTable lastMessageTable;
         private int pollingInterval = 2000;
         private int countDown = 120;
+        private String modeChat = "";
+        private int group_id;
 
         public ChatForm()
         {
@@ -74,7 +76,7 @@ namespace ChatApplication_CSharp
 
             string connectionString = "Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
             //string connectionString = "Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
-            string query = "SELECT * FROM [Group]";
+            string query = "SELECT * FROM [Group] WHERE id_nguoi_tao = @id OR id_thanh_vien LIKE '%' + CAST(@id AS NVARCHAR(MAX)) + '%'";
 
             try
             {
@@ -82,9 +84,14 @@ namespace ChatApplication_CSharp
                 {
                     connection.Open();
 
-                    using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
+                    using (SqlCommand command = new SqlCommand(query, connection))
                     {
-                        adapter.Fill(groupTable);
+                        command.Parameters.AddWithValue("@id", id);
+
+                        using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                        {
+                            adapter.Fill(groupTable);
+                        }
                     }
                 }
             }
@@ -165,6 +172,39 @@ namespace ChatApplication_CSharp
             return messageTable;
         }
 
+        private DataTable GetAllMessagesInGroup(int group_id)
+        {
+            DataTable messageTable = new DataTable();
+
+            string connectionString = "Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
+            //string connectionString = "Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
+            string query = "SELECT * FROM [MessageGroup] WHERE (group_id = @group_id) ORDER BY send_time ASC";
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@group_id", group_id);
+
+                        using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                        {
+                            adapter.Fill(messageTable);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Đã xảy ra lỗi: " + ex.Message);
+            }
+
+            return messageTable;
+        }
+
         public Image ConvertByteArrayToImage(byte[] byteArray)
         {
             using (MemoryStream memoryStream = new MemoryStream(byteArray))
@@ -183,51 +223,73 @@ namespace ChatApplication_CSharp
 
             foreach (DataRow row in messageTable.Rows)
             {
-                int senderId = int.Parse(row["SenderUsername"].ToString());
                 
-                if(senderId == id)
+                if(modeChat == "single")
                 {
+                    int senderId = int.Parse(row["SenderUsername"].ToString());
+                    if (senderId == id)
+                    {
                         string senttime = row["SentTime"].ToString();
                         ChatTime chatTime = new ChatTime(senttime);
                         flowLayoutPanel1.Controls.Add(chatTime);
 
-                    if (row["img"].ToString() != "")
-                    {
-                        ImageMessage imageMessage = new ImageMessage();
-                        imageData = (byte[])row["img"];
-                        image = ConvertByteArrayToImage(imageData);
-                        imageMessage.pictureBox1.Image = image;
-                        flowLayoutPanel1.Controls.Add(imageMessage);
+                        if (row["img"].ToString() != "")
+                        {
+                            ImageMessage imageMessage = new ImageMessage();
+                            imageData = (byte[])row["img"];
+                            image = ConvertByteArrayToImage(imageData);
+                            imageMessage.pictureBox1.Image = image;
+                            flowLayoutPanel1.Controls.Add(imageMessage);
+                        }
+                        if (row["MessageText"].ToString() != "")
+                        {
+                            string message = row["MessageText"].ToString();
+                            DateTime sentTime = (DateTime)row["SentTime"];
+                            Message messageControl = new Message(message, sentTime);
+                            flowLayoutPanel1.Controls.Add(messageControl);
+                        }
                     }
-                    if (row["MessageText"].ToString() != "")
+                    else
                     {
-                        string message = row["MessageText"].ToString();
-                        DateTime sentTime = (DateTime)row["SentTime"];
+                        string senttime = row["SentTime"].ToString();
+                        ChatTime chatTime = new ChatTime(senttime);
+                        flowLayoutPanel1.Controls.Add(chatTime);
+                        if (row["img"].ToString() != "")
+                        {
+                            ImageMessage1 imageMessage = new ImageMessage1();
+                            imageData = (byte[])row["img"];
+                            image = ConvertByteArrayToImage(imageData);
+                            imageMessage.pictureBox1.Image = image;
+                            flowLayoutPanel1.Controls.Add(imageMessage);
+                        }
+                        if (row["MessageText"].ToString() != "")
+                        {
+                            string message = row["MessageText"].ToString();
+                            DateTime sentTime = (DateTime)row["SentTime"];
+                            Message1 messageControl = new Message1(message, sentTime);
+                            flowLayoutPanel1.Controls.Add(messageControl);
+                        }
+                    }
+                }
+                else if(modeChat == "multi")
+                {
+                    int senderId = int.Parse(row["sender_id"].ToString());
+                    if(senderId == id)
+                    {
+                        string message = row["content"].ToString();
+                        DateTime sentTime = (DateTime)row["send_time"];
                         Message messageControl = new Message(message, sentTime);
                         flowLayoutPanel1.Controls.Add(messageControl);
                     }
-                }
-                else
-                {
-                    string senttime = row["SentTime"].ToString();
-                    ChatTime chatTime = new ChatTime(senttime);
-                    flowLayoutPanel1.Controls.Add(chatTime);
-                    if (row["img"].ToString() != "")
+                    else
                     {
-                        ImageMessage1 imageMessage = new ImageMessage1();
-                        imageData = (byte[])row["img"];
-                        image = ConvertByteArrayToImage(imageData);
-                        imageMessage.pictureBox1.Image = image;
-                        flowLayoutPanel1.Controls.Add(imageMessage);
-                    }
-                    if (row["MessageText"].ToString() != "")
-                    {
-                        string message = row["MessageText"].ToString();
-                        DateTime sentTime = (DateTime)row["SentTime"];
+                        string message = row["content"].ToString();
+                        DateTime sentTime = (DateTime)row["send_time"];
                         Message1 messageControl = new Message1(message, sentTime);
                         flowLayoutPanel1.Controls.Add(messageControl);
                     }
                 }
+                
             }
         }
         private void ChatForm_Load(object sender, EventArgs e)
@@ -258,6 +320,7 @@ namespace ChatApplication_CSharp
         {
             if (e.RowIndex >= 0)
             {
+                modeChat = "single";
                 DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
                 string idString = row.Cells["ID"].Value.ToString();
                 if (int.TryParse(idString, out int selectedId))
@@ -271,23 +334,46 @@ namespace ChatApplication_CSharp
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string connectionString = "Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
-            //string connectionString = "Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
-            SqlConnection connection = new SqlConnection(connectionString);
-            connection.Open();
-            string query = "INSERT INTO [Message] (SenderUsername, ReceiverUsername, MessageText, SentTime) VALUES (@sender, @receiver, @message, @sentTime)";
-            SqlCommand command = new SqlCommand(query, connection);
+            if(modeChat == "single")
+            {
+                string connectionString = "Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
+                //string connectionString = "Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
+                SqlConnection connection = new SqlConnection(connectionString);
+                connection.Open();
+                string query = "INSERT INTO [Message] (SenderUsername, ReceiverUsername, MessageText, SentTime) VALUES (@sender, @receiver, @message, @sentTime)";
+                SqlCommand command = new SqlCommand(query, connection);
 
-            command.Parameters.AddWithValue("@sender", id);
-            command.Parameters.AddWithValue("@receiver", receiver);
-            command.Parameters.AddWithValue("@message", txtMessage.Text);
-            command.Parameters.AddWithValue("@sentTime", DateTime.Now);
-            command.ExecuteNonQuery();
+                command.Parameters.AddWithValue("@sender", id);
+                command.Parameters.AddWithValue("@receiver", receiver);
+                command.Parameters.AddWithValue("@message", txtMessage.Text);
+                command.Parameters.AddWithValue("@sentTime", DateTime.Now);
+                command.ExecuteNonQuery();
 
-            connection.Close();
-            LoadLatestMessages();
+                connection.Close();
+                LoadLatestMessages();
 
-            txtMessage.Text = "";
+                txtMessage.Text = "";
+            }    
+            else if(modeChat == "multi")
+            {
+                string connectionString = "Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
+                //string connectionString = "Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
+                SqlConnection connection = new SqlConnection(connectionString);
+                connection.Open();
+                string query = "INSERT INTO [MessageGroup] (content, sender_id, group_id , send_time) VALUES (@content, @sender_id, @group_id,@send_time)";
+                SqlCommand command = new SqlCommand(query, connection);
+
+                command.Parameters.AddWithValue("@content", txtMessage.Text);
+                command.Parameters.AddWithValue("@sender_id", id);
+                command.Parameters.AddWithValue("@group_id",group_id );
+                command.Parameters.AddWithValue("@send_time", DateTime.Now);
+                command.ExecuteNonQuery();
+
+                connection.Close();
+                LoadLatestMessages();
+
+                txtMessage.Text = "";
+            }
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -422,6 +508,20 @@ namespace ChatApplication_CSharp
                 graphics.DrawImage(image, 0, 0, width, height);
             }
             return resizedImage;
+        }
+
+        private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                modeChat = "multi";
+                DataGridViewRow row = dataGridView2.Rows[e.RowIndex];
+                string idString = row.Cells["id_nhom"].Value.ToString();
+                group_id = Int32.Parse(idString);
+                MessageBox.Show(modeChat + "_" + group_id);
+                DataTable dt = GetAllMessagesInGroup(group_id);
+                DisplayMessagesInFlowLayoutPanel(dt);
+            }
         }
     }
 }
