@@ -34,6 +34,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Spire.Pdf, Version=8.6.0.0, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSpire.PDFViewer.7.6.0\lib\net46\Spire.Pdf.dll</HintPath>
+    </Reference>
+    <Reference Include="Spire.PdfViewer.Asp, Version=7.6.0.0, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSpire.PDFViewer.7.6.0\lib\net46\Spire.PdfViewer.Asp.dll</HintPath>
+    </Reference>
+    <Reference Include="Spire.PdfViewer.Forms, Version=7.6.0.0, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSpire.PDFViewer.7.6.0\lib\net46\Spire.PdfViewer.Forms.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -114,6 +123,12 @@
       <DependentUpon>Message1.cs</DependentUpon>
     </Compile>
     <Compile Include="Mp3Player.cs" />
+    <Compile Include="pdfFile.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="pdfFile.Designer.cs">
+      <DependentUpon>pdfFile.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReactMessage.cs">
@@ -127,6 +142,12 @@
     </Compile>
     <Compile Include="RegisterUC.Designer.cs">
       <DependentUpon>RegisterUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SettingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SettingForm.Designer.cs">
+      <DependentUpon>SettingForm.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="addGroup.resx">
       <DependentUpon>addGroup.cs</DependentUpon>
@@ -161,6 +182,9 @@
     <EmbeddedResource Include="Message1.resx">
       <DependentUpon>Message1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="pdfFile.resx">
+      <DependentUpon>pdfFile.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -177,6 +201,10 @@
     <EmbeddedResource Include="RegisterUC.resx">
       <DependentUpon>RegisterUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="SettingForm.resx">
+      <DependentUpon>SettingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -225,6 +253,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\stop-button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pdf.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

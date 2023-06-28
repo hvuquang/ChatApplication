@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Spire.PdfViewer.Asp;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -255,6 +256,11 @@ namespace ChatApplication_CSharp
                             AudioFile audioFile = new AudioFile(row["AudioLink"].ToString());
                             flowLayoutPanel1.Controls.Add(audioFile);
                         }
+                        if (row["FileLink"].ToString() != "")
+                        {
+                            pdfFile pdfFile = new pdfFile(row["FileLink"].ToString());
+                            flowLayoutPanel1.Controls.Add(pdfFile);
+                        }
                     }
                     else
                     {
@@ -441,6 +447,7 @@ namespace ChatApplication_CSharp
             {
                 // Retrieve the selected file path
                 string filePath = openFileDialog.FileName;
+                
                 string fileExtension = Path.GetExtension(filePath);
 
                 // Process the file or save the path to the database
@@ -448,26 +455,49 @@ namespace ChatApplication_CSharp
                 string connectionString = "Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
                 SqlConnection connection = new SqlConnection(connectionString);
                 connection.Open();
-                string query = "INSERT INTO [Message] (SenderUsername, ReceiverUsername, img, SentTime, AudioLink) VALUES (@sender, @receiver, @img, @sentTime, @AudioLink)";
+                string query = "INSERT INTO [Message] (SenderUsername, ReceiverUsername, img, SentTime, AudioLink, FileLink) VALUES (@sender, @receiver, CONVERT(varbinary(max), @img), @sentTime, @AudioLink, @FileLink)";
                 SqlCommand command = new SqlCommand(query, connection);
 
                 // Read the file as binary data
                 byte[] binaryData = null;
                 string AudioLink = null;
-                if (fileExtension == ".*.jpg" || fileExtension == "*.png" || fileExtension == "*.gif")
+                string FileLink = null;
+                if (fileExtension == ".jpg" || fileExtension == ".png" || fileExtension == ".gif")
                 {
-                   binaryData = File.ReadAllBytes(filePath);
+                    binaryData = File.ReadAllBytes(filePath);
+                    command.Parameters.AddWithValue("@sender", id);
+                    command.Parameters.AddWithValue("@receiver", receiver);
+                    command.Parameters.AddWithValue("@img", binaryData);
+                    command.Parameters.AddWithValue("@sentTime", DateTime.Now);
+                    command.Parameters.AddWithValue("@AudioLink", DBNull.Value);
+                    command.Parameters.AddWithValue("@FileLink", DBNull.Value);
                 }
-                else if (fileExtension == "*.mp3")
+                else if (fileExtension == ".mp3")
                 {
-                    AudioLink = File.ReadAllText(filePath);
+                    AudioLink = filePath;
+                    //MessageBox.Show(AudioLink);
+                    command.Parameters.AddWithValue("@sender", id);
+                    command.Parameters.AddWithValue("@receiver", receiver);
+                    command.Parameters.AddWithValue("@img", DBNull.Value);
+                    command.Parameters.AddWithValue("@sentTime", DateTime.Now);
+                    command.Parameters.AddWithValue("@AudioLink", AudioLink);
+                    command.Parameters.AddWithValue("@FileLink", DBNull.Value);
+                }
+                else if (fileExtension == ".pdf")
+                {
+                    FileLink = filePath;
+                    command.Parameters.AddWithValue("@sender", id);
+                    command.Parameters.AddWithValue("@receiver", receiver);
+                    command.Parameters.AddWithValue("@img", DBNull.Value);
+                    command.Parameters.AddWithValue("@sentTime", DateTime.Now);
+                    command.Parameters.AddWithValue("@AudioLink", DBNull.Value);
+                    command.Parameters.AddWithValue("@FileLink", FileLink);
+
+                    //SettingForm settingForm = new SettingForm(filePath);
+                    //settingForm.Show();
+                    //settingForm.BringToFront();
                 }
 
-                command.Parameters.AddWithValue("@sender", id);
-                command.Parameters.AddWithValue("@receiver", receiver);
-                command.Parameters.AddWithValue("@img", binaryData);
-                command.Parameters.AddWithValue("@sentTime", DateTime.Now);
-                command.Parameters.AddWithValue("@AudioLink", AudioLink);
                 command.ExecuteNonQuery();
 
                 connection.Close();
