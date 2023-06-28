@@ -26,8 +26,8 @@ namespace ChatApplication_CSharp
         {
             DataTable userTable = new DataTable();
 
-            //string connectionString = "Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
-            string connectionString = "Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
+            string connectionString = "Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
+            //string connectionString = "Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
             string query = "SELECT username,id FROM userTab";
 
             try
@@ -61,7 +61,7 @@ namespace ChatApplication_CSharp
             listView1.View = View.Details;
 
             // Thêm cột checkbox
-            listView1.Columns.Add("Checkbox", 80);
+            listView1.Columns.Add("Chọn", 80);
 
             // Thêm cột tên người dùng
             listView1.Columns.Add("Tên người dùng", 120);
@@ -86,26 +86,7 @@ namespace ChatApplication_CSharp
             }
         }
 
-        private void listView1_Click(object sender, EventArgs e)
-        {
-            if (listView1.SelectedItems.Count > 0)
-            {
-                int userId = (int)listView1.SelectedItems[0].Tag;
-
-                if (!selectedIds.Contains(userId))
-                {
-                    selectedIds.Add(userId);
-                }
-                else
-                {
-                    selectedIds.Remove(userId);
-                }
-
-                string selectedIdsString = string.Join(",", selectedIds); // Chuyển đổi mảng selectedIds thành chuỗi
-
-                MessageBox.Show("Id của dòng được chọn: " + selectedIdsString);
-            }
-        }
+        
 
         private void label1_Click(object sender, EventArgs e)
         {
@@ -120,8 +101,8 @@ namespace ChatApplication_CSharp
         {
             byte[] b = ImageToByteArray(pictureBox1.Image);
             string selectedIdsString = string.Join(",", selectedIds);
-            //SqlConnection connection = new SqlConnection("Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True");
-            SqlConnection connection = new SqlConnection("Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True");
+            SqlConnection connection = new SqlConnection("Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True");
+            //SqlConnection connection = new SqlConnection("Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True");
             connection.Open();
             SqlCommand cmd = new SqlCommand("insert into [Group] values (@id_nguoi_tao , @id_thanh_vien , @hinh_anh , @ten_nhom)", connection);
             cmd.Parameters.AddWithValue("@id_nguoi_tao", id);
@@ -138,6 +119,30 @@ namespace ChatApplication_CSharp
             MemoryStream m = new MemoryStream();
             img.Save(m, System.Drawing.Imaging.ImageFormat.Png);
             return m.ToArray();
+        }
+
+        private void listView1_Click(object sender, EventArgs e)
+        {
+            if (listView1.SelectedItems.Count > 0)
+            {
+                ListViewItem selectedItem = listView1.SelectedItems[0];
+                int userId = (int)selectedItem.Tag;
+
+                if (!selectedIds.Contains(userId))
+                {
+                    selectedIds.Add(userId);
+                    selectedItem.BackColor = Color.LightBlue; // Đặt màu nền của dòng đã chọn
+                }
+                else
+                {
+                    selectedIds.Remove(userId);
+                    selectedItem.BackColor = Color.White; // Đặt lại màu nền mặc định cho dòng
+                }
+
+                string selectedIdsString = string.Join(",", selectedIds); // Chuyển đổi mảng selectedIds thành chuỗi
+
+                MessageBox.Show("Id của dòng được chọn: " + selectedIdsString);
+            }
         }
     }
 }
