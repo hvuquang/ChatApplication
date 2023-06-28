@@ -102,7 +102,7 @@ namespace ChatApplication_CSharp
 
             loadData();
             //lbTime.Text = sentDate.ToString("dd-MM-yyyy HH:mm");
-            ReactMessage reactMessage = new ReactMessage(10, likes, laughs, messageID);
+            ReactMessage reactMessage = new ReactMessage(hearts, likes, laughs, messageID);
             reactMessage.Location = new Point(575, 78);
             reactMessage.BringToFront();
             this.Controls.Add(reactMessage);

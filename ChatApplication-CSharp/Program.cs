@@ -16,6 +16,7 @@ namespace ChatApplication_CSharp
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            //MessageBox.Show("run");
             Application.Run(new Form1());
         }
     }
