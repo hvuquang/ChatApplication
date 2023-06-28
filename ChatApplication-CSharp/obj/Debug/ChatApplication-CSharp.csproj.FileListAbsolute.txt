@@ -38,3 +38,4 @@ C:\Users\HP\Documents\GitHub\ChatApplication\ChatApplication-CSharp\obj\Debug\Ch
 C:\Users\HUY\Documents\GitHub\ChatApplication\ChatApplication-CSharp\obj\Debug\ChatApplication_CSharp.ChatTime.resources
 C:\Users\HUY\Documents\GitHub\ChatApplication\ChatApplication-CSharp\obj\Debug\ChatApplication_CSharp.ImageMessage1.resources
 C:\Users\HUY\Documents\GitHub\ChatApplication\ChatApplication-CSharp\obj\Debug\ChatApplication_CSharp.ImageMessage.resources
+C:\Users\HP\Documents\GitHub\ChatApplication\ChatApplication-CSharp\obj\Debug\ChatApplication_CSharp.ReactMessage.resources

@@ -26,8 +26,8 @@ namespace ChatApplication_CSharp
         {
             DataTable userTable = new DataTable();
 
-            string connectionString = "Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
-            //string connectionString = "Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
+            //string connectionString = "Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
+            string connectionString = "Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
             string query = "SELECT username,id FROM userTab";
 
             try
@@ -120,8 +120,8 @@ namespace ChatApplication_CSharp
         {
             byte[] b = ImageToByteArray(pictureBox1.Image);
             string selectedIdsString = string.Join(",", selectedIds);
-            SqlConnection connection = new SqlConnection("Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True");
-            //SqlConnection connection = new SqlConnection("Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True");
+            //SqlConnection connection = new SqlConnection("Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True");
+            SqlConnection connection = new SqlConnection("Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True");
             connection.Open();
             SqlCommand cmd = new SqlCommand("insert into [Group] values (@id_nguoi_tao , @id_thanh_vien , @hinh_anh , @ten_nhom)", connection);
             cmd.Parameters.AddWithValue("@id_nguoi_tao", id);

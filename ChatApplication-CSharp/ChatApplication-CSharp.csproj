@@ -103,6 +103,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReactMessage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ReactMessage.Designer.cs">
+      <DependentUpon>ReactMessage.cs</DependentUpon>
+    </Compile>
     <Compile Include="RegisterUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -146,6 +152,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="ReactMessage.resx">
+      <DependentUpon>ReactMessage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="RegisterUC.resx">
       <DependentUpon>RegisterUC.cs</DependentUpon>
     </EmbeddedResource>
@@ -182,6 +191,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\flamingo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\heart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\like.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\laughing.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

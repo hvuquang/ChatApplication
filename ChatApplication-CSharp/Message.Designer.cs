@@ -30,6 +30,7 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.lbTime = new System.Windows.Forms.Label();
+            this.reactMessage1 = new ChatApplication_CSharp.ReactMessage();
             this.SuspendLayout();
             // 
             // label1
@@ -56,17 +57,28 @@
             this.lbTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lbTime.Visible = false;
             // 
+            // reactMessage1
+            // 
+            this.reactMessage1.BackColor = System.Drawing.Color.Teal;
+            this.reactMessage1.Location = new System.Drawing.Point(146, 76);
+            this.reactMessage1.Name = "reactMessage1";
+            this.reactMessage1.Size = new System.Drawing.Size(136, 27);
+            this.reactMessage1.TabIndex = 2;
+            this.reactMessage1.Visible = false;
+            // 
             // Message
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
+            this.Controls.Add(this.reactMessage1);
             this.Controls.Add(this.lbTime);
             this.Controls.Add(this.label1);
             this.Margin = new System.Windows.Forms.Padding(128, 2, 2, 2);
             this.Name = "Message";
-            this.Size = new System.Drawing.Size(712, 76);
+            this.Size = new System.Drawing.Size(712, 111);
             this.Load += new System.EventHandler(this.Message_Load);
+            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Message_MouseClick);
             this.ResumeLayout(false);
 
         }
@@ -75,5 +87,6 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lbTime;
+        private ReactMessage reactMessage1;
     }
 }
