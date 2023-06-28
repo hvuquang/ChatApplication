@@ -53,6 +53,18 @@
     <Compile Include="addGroup.Designer.cs">
       <DependentUpon>addGroup.cs</DependentUpon>
     </Compile>
+    <Compile Include="AudioFile1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AudioFile1.Designer.cs">
+      <DependentUpon>AudioFile1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AudioFile.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AudioFile.Designer.cs">
+      <DependentUpon>AudioFile.cs</DependentUpon>
+    </Compile>
     <Compile Include="ChatForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -101,6 +113,7 @@
     <Compile Include="Message1.Designer.cs">
       <DependentUpon>Message1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Mp3Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReactMessage.cs">
@@ -117,6 +130,12 @@
     </Compile>
     <EmbeddedResource Include="addGroup.resx">
       <DependentUpon>addGroup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AudioFile1.resx">
+      <DependentUpon>AudioFile1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AudioFile.resx">
+      <DependentUpon>AudioFile.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ChatForm.resx">
       <DependentUpon>ChatForm.cs</DependentUpon>
@@ -200,6 +219,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\laughing.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\play-button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\stop-button.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

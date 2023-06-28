@@ -250,6 +250,11 @@ namespace ChatApplication_CSharp
                             Message messageControl = new Message(message, sentTime, messageID);
                             flowLayoutPanel1.Controls.Add(messageControl);
                         }
+                        if (row["AudioLink"].ToString() != "")
+                        {
+                            AudioFile audioFile = new AudioFile(row["AudioLink"].ToString());
+                            flowLayoutPanel1.Controls.Add(audioFile);
+                        }
                     }
                     else
                     {
@@ -271,6 +276,11 @@ namespace ChatApplication_CSharp
                             DateTime sentTime = (DateTime)row["SentTime"];
                             Message1 messageControl = new Message1(message, sentTime, messageID);
                             flowLayoutPanel1.Controls.Add(messageControl);
+                        }
+                        if (row["AudioLink"].ToString() != "")
+                        {
+                            AudioFile1 audioFile = new AudioFile1(row["AudioLink"].ToString());
+                            flowLayoutPanel1.Controls.Add(audioFile);
                         }
                     }
                 }
@@ -419,33 +429,45 @@ namespace ChatApplication_CSharp
 
         private void button2_Click(object sender, EventArgs e)
         {
+
             OpenFileDialog openFileDialog = new OpenFileDialog();
 
             // Set the initial directory and filter for the file dialog
             openFileDialog.InitialDirectory = "C:\\";
-            openFileDialog.Filter = "Image Files (*.jpg; *.png; *.gif)|*.jpg;*.png;*.gif";
+            //openFileDialog.Filter = "Image Files (*.jpg; *.png; *.gif)|*.jpg;*.png;*.gif";
+            openFileDialog.Filter = "All Files|*.*";
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 // Retrieve the selected file path
                 string filePath = openFileDialog.FileName;
+                string fileExtension = Path.GetExtension(filePath);
 
                 // Process the file or save the path to the database
-                // ...
                 //string connectionString = "Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
                 string connectionString = "Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
                 SqlConnection connection = new SqlConnection(connectionString);
                 connection.Open();
-                string query = "INSERT INTO [Message] (SenderUsername, ReceiverUsername, img, SentTime) VALUES (@sender, @receiver, @img, @sentTime)";
+                string query = "INSERT INTO [Message] (SenderUsername, ReceiverUsername, img, SentTime, AudioLink) VALUES (@sender, @receiver, @img, @sentTime, @AudioLink)";
                 SqlCommand command = new SqlCommand(query, connection);
 
                 // Read the file as binary data
-                byte[] binaryData = File.ReadAllBytes(filePath);
+                byte[] binaryData = null;
+                string AudioLink = null;
+                if (fileExtension == ".*.jpg" || fileExtension == "*.png" || fileExtension == "*.gif")
+                {
+                   binaryData = File.ReadAllBytes(filePath);
+                }
+                else if (fileExtension == "*.mp3")
+                {
+                    AudioLink = File.ReadAllText(filePath);
+                }
 
                 command.Parameters.AddWithValue("@sender", id);
                 command.Parameters.AddWithValue("@receiver", receiver);
                 command.Parameters.AddWithValue("@img", binaryData);
                 command.Parameters.AddWithValue("@sentTime", DateTime.Now);
+                command.Parameters.AddWithValue("@AudioLink", AudioLink);
                 command.ExecuteNonQuery();
 
                 connection.Close();
@@ -474,47 +496,6 @@ namespace ChatApplication_CSharp
             if (e.KeyCode == Keys.Enter)
             {
                  button1_Click(sender, e);
-                ////string connectionString = "Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
-                ////timer for sent time
-                //timer1.Start();
-
-                //string connectionString = "Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
-                //SqlConnection connection = new SqlConnection(connectionString);
-                //connection.Open();
-                //string query = "INSERT INTO [Message] (SenderUsername, ReceiverUsername, MessageText, SentTime) VALUES (@sender, @receiver, @message, @sentTime)";
-                //SqlCommand command = new SqlCommand(query, connection);
-
-                //command.Parameters.AddWithValue("@sender", id);
-                //command.Parameters.AddWithValue("@receiver", receiver);
-                //command.Parameters.AddWithValue("@message", txtMessage.Text);
-                //command.Parameters.AddWithValue("@sentTime", DateTime.Now);
-                //command.ExecuteNonQuery();
-
-                //////lấy id
-                //int generatedId = 0;
-                //SqlDataReader reader = command.ExecuteReader();
-                //if (reader.Read())
-                //{
-                //    generatedId = (int)reader["Id"];
-                //}
-                //reader.Close();
-                //int messageId = generatedId;
-
-                ////bỏ data vô reactmessage
-                //string query1 = "INSERT INTO [ReactionMessage] (hearts, likes, laughs, messageID ) VALUES (@hearts, @likes, @laughs, @messageID)";
-
-                //SqlCommand command1 = new SqlCommand(query1, connection);
-
-                //command1.Parameters.AddWithValue("@hearts", 0);
-                //command1.Parameters.AddWithValue("@likes", 0);
-                //command1.Parameters.AddWithValue("@laughs", 0);
-                //command1.Parameters.AddWithValue("@messageID", messageId);
-                //command1.ExecuteNonQuery();
-
-                //connection.Close();
-                //LoadLatestMessages();
-
-                //txtMessage.Text = "";
             }
         }
 

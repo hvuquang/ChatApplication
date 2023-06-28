@@ -50,7 +50,6 @@ namespace ChatApplication_CSharp
                     updateCommand.Parameters.AddWithValue("@laugh", laugh);
                     updateCommand.Parameters.AddWithValue("@messageID", messageID);
                     updateCommand.ExecuteNonQuery();
-                    MessageBox.Show("run");
                 }
             }
             catch (Exception ex)
@@ -70,12 +69,14 @@ namespace ChatApplication_CSharp
         {
             like++;
             lbLike.Text = like.ToString();
+            updateData();
         }
 
         private void btnLaugh_Click(object sender, EventArgs e)
         {
             laugh++;
             lbLaugh.Text = laugh.ToString();
+            updateData();
         }
     }
 }

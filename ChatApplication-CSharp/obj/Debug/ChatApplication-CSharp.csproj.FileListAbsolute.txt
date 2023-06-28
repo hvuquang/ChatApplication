@@ -39,3 +39,5 @@ C:\Users\HUY\Documents\GitHub\ChatApplication\ChatApplication-CSharp\obj\Debug\C
 C:\Users\HUY\Documents\GitHub\ChatApplication\ChatApplication-CSharp\obj\Debug\ChatApplication_CSharp.ImageMessage1.resources
 C:\Users\HUY\Documents\GitHub\ChatApplication\ChatApplication-CSharp\obj\Debug\ChatApplication_CSharp.ImageMessage.resources
 C:\Users\HP\Documents\GitHub\ChatApplication\ChatApplication-CSharp\obj\Debug\ChatApplication_CSharp.ReactMessage.resources
+C:\Users\HP\Documents\GitHub\ChatApplication\ChatApplication-CSharp\obj\Debug\ChatApplication_CSharp.AudioFile.resources
+C:\Users\HP\Documents\GitHub\ChatApplication\ChatApplication-CSharp\obj\Debug\ChatApplication_CSharp.AudioFile1.resources
