@@ -22,6 +22,7 @@ namespace ChatApplication_CSharp
         private int countDown = 120;
         private String modeChat = "";
         private int group_id;
+        private DataTable lastMessageGroupTable;
 
         public ChatForm()
         {
@@ -305,6 +306,12 @@ namespace ChatApplication_CSharp
             {
                 lastMessageTable = currentMessageTable;
                 DisplayMessagesInFlowLayoutPanel(lastMessageTable);
+            }
+            DataTable currentGroupTable = GetAllMessagesInGroup(group_id);
+            if (lastMessageGroupTable == null || !lastMessageGroupTable.Rows.Cast<DataRow>().SequenceEqual(currentGroupTable.Rows.Cast<DataRow>(), DataRowComparer.Default))
+            {
+                lastMessageGroupTable = currentGroupTable;
+                DisplayMessagesInFlowLayoutPanel(lastMessageGroupTable);
             }
         }
 
