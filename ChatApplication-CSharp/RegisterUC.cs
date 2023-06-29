@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,7 +28,7 @@ namespace ChatApplication_CSharp
             cmd.Parameters.AddWithValue("@username", txtUsername.Text);
             cmd.Parameters.AddWithValue("@password", txtPass.Text);
             cmd.Parameters.AddWithValue("@email", txtEmail.Text);
-            cmd.Parameters.AddWithValue("@image", Convert.ToInt32(1));
+            cmd.Parameters.AddWithValue("@image", b);
             cmd.ExecuteNonQuery();
             connection.Close();
 
@@ -37,6 +38,12 @@ namespace ChatApplication_CSharp
             txtConfirm.Text = "";
 
             MessageBox.Show("Tạo tài khoản thành công");
+        }
+        byte[] ImageToByteArray(Image img)
+        {
+            MemoryStream m = new MemoryStream();
+            img.Save(m, System.Drawing.Imaging.ImageFormat.Png);
+            return m.ToArray();
         }
     }
 }

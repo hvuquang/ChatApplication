@@ -66,7 +66,8 @@ namespace ChatApplication_CSharp
             {
                 return;
             }
-            string connectionString = "Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
+            string connectionString = "Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
+            //string connectionString = "Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
             string query = "SELECT * FROM [ReactionMessage] WHERE (messageID = @messageID)";
             if (mode == "group")
             {
