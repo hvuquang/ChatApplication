@@ -888,5 +888,17 @@ namespace ChatApplication_CSharp
             cmd.ExecuteNonQuery();
             connection.Close();
         }
+
+        private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            //if (dataGridView1.Columns[e.ColumnIndex].Name == "image" && e.RowIndex >= 0)
+            //{
+            //    if (e.Value != null && e.Value is Image)
+            //    {
+            //        Image image = (Image)e.Value;
+            //        e.Value = ResizeImage(image, 50, 50);
+            //    }
+            //}
+        }
     }
 }

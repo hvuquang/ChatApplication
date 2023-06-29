@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
@@ -114,7 +115,10 @@ namespace ChatApplication_CSharp
                         {
                             // Access and process the retrieved data
                             name = (string)reader["username"];
-                            
+                            //pictureBox1.Image = 
+                            byte[] imageBytes = (byte[])reader["image"];
+                            Image image = ConvertByteArrayToImage(imageBytes);
+                            pictureBox1.Image = image;
                         }
                         reader.Close();
                     }
@@ -159,6 +163,21 @@ namespace ChatApplication_CSharp
             this.Controls.Add(reactMessage);
             lbMessage.Text = message;
             label1.Text = name;
+        }
+        byte[] ImageToByteArray(Image img)
+        {
+            MemoryStream m = new MemoryStream();
+            img.Save(m, System.Drawing.Imaging.ImageFormat.Png);
+            return m.ToArray();
+        }
+
+        public Image ConvertByteArrayToImage(byte[] byteArray)
+        {
+            using (MemoryStream memoryStream = new MemoryStream(byteArray))
+            {
+                Image image = Image.FromStream(memoryStream);
+                return image;
+            }
         }
     }
 }
