@@ -22,6 +22,8 @@ namespace ChatApplication_CSharp
         private int likes;
         private int laughs;
         private string mode;
+        private string ID;
+        private string name;
         public Message1()
         {
             InitializeComponent();
@@ -58,10 +60,13 @@ namespace ChatApplication_CSharp
             }
             string connectionString = "Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
             string query = "SELECT * FROM [ReactionMessage] WHERE (messageID = @messageID)";
+            string querySenderID = "SELECT * FROM [Message] WHERE (ID = @messageID)";
+            string queryName = "SELECT * FROM [userTab] WHERE (ID = @ID)";
             //SqlCommand command = new SqlCommand(query, connectionString);
             if (mode == "group")
             {
                 query = "SELECT * FROM [ReactionMessage1] WHERE (messageID = @messageID)";
+                querySenderID = "SELECT * FROM [MessageGroup] WHERE (message_id = @messageID)";
             }
 
             try
@@ -81,7 +86,39 @@ namespace ChatApplication_CSharp
                             likes = (int)reader["likes"];
                             laughs = (int)reader["laughs"];
                         }
+                        reader.Close();
                     }
+                    SqlCommand command1 = new SqlCommand(querySenderID, connection);
+                    command1.Parameters.AddWithValue("@messageID", messageID);
+                    using (SqlDataReader reader = command1.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            // Access and process the retrieved data
+                            if(mode == "group")
+                            {
+                                ID = (string)reader["sender_id"].ToString();
+                            }
+                            else 
+                                ID = (string)reader["SenderUsername"].ToString();
+                           
+                        }
+                        reader.Close();
+                    }
+                    SqlCommand command2 = new SqlCommand(queryName, connection);
+                    command2.Parameters.AddWithValue("@ID", ID);
+                    using (SqlDataReader reader = command2.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            // Access and process the retrieved data
+                            name = (string)reader["username"];
+                            
+                        }
+                        reader.Close();
+                    }
+
+
                 }
             }
             catch (Exception ex)
@@ -120,6 +157,7 @@ namespace ChatApplication_CSharp
             reactMessage.BringToFront();
             this.Controls.Add(reactMessage);
             lbMessage.Text = message;
+            label1.Text = name;
         }
     }
 }
