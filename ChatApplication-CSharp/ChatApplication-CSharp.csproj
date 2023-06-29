@@ -34,6 +34,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Spire.Pdf, Version=8.6.0.0, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSpire.PDFViewer.7.6.0\lib\net46\Spire.Pdf.dll</HintPath>
+    </Reference>
+    <Reference Include="Spire.PdfViewer.Asp, Version=7.6.0.0, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSpire.PDFViewer.7.6.0\lib\net46\Spire.PdfViewer.Asp.dll</HintPath>
+    </Reference>
+    <Reference Include="Spire.PdfViewer.Forms, Version=7.6.0.0, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSpire.PDFViewer.7.6.0\lib\net46\Spire.PdfViewer.Forms.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -52,6 +61,24 @@
     </Compile>
     <Compile Include="addGroup.Designer.cs">
       <DependentUpon>addGroup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AudioFile1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AudioFile1.Designer.cs">
+      <DependentUpon>AudioFile1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AudioFile.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AudioFile.Designer.cs">
+      <DependentUpon>AudioFile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BigImage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BigImage.Designer.cs">
+      <DependentUpon>BigImage.cs</DependentUpon>
     </Compile>
     <Compile Include="ChatForm.cs">
       <SubType>Form</SubType>
@@ -83,6 +110,12 @@
     <Compile Include="ImageMessage.Designer.cs">
       <DependentUpon>ImageMessage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Images.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Images.Designer.cs">
+      <DependentUpon>Images.cs</DependentUpon>
+    </Compile>
     <Compile Include="LoginUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -101,6 +134,19 @@
     <Compile Include="Message1.Designer.cs">
       <DependentUpon>Message1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Mp3Player.cs" />
+    <Compile Include="pdfFile1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="pdfFile1.Designer.cs">
+      <DependentUpon>pdfFile1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="pdfFile.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="pdfFile.Designer.cs">
+      <DependentUpon>pdfFile.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReactMessage.cs">
@@ -115,8 +161,23 @@
     <Compile Include="RegisterUC.Designer.cs">
       <DependentUpon>RegisterUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="SettingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SettingForm.Designer.cs">
+      <DependentUpon>SettingForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="addGroup.resx">
       <DependentUpon>addGroup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AudioFile1.resx">
+      <DependentUpon>AudioFile1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AudioFile.resx">
+      <DependentUpon>AudioFile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BigImage.resx">
+      <DependentUpon>BigImage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ChatForm.resx">
       <DependentUpon>ChatForm.cs</DependentUpon>
@@ -133,6 +194,9 @@
     <EmbeddedResource Include="ImageMessage.resx">
       <DependentUpon>ImageMessage.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Images.resx">
+      <DependentUpon>Images.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LoginUC.resx">
       <DependentUpon>LoginUC.cs</DependentUpon>
     </EmbeddedResource>
@@ -141,6 +205,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Message1.resx">
       <DependentUpon>Message1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pdfFile1.resx">
+      <DependentUpon>pdfFile1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pdfFile.resx">
+      <DependentUpon>pdfFile.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -158,6 +228,10 @@
     <EmbeddedResource Include="RegisterUC.resx">
       <DependentUpon>RegisterUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="SettingForm.resx">
+      <DependentUpon>SettingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -200,6 +274,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\laughing.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\play-button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\stop-button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pdf.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

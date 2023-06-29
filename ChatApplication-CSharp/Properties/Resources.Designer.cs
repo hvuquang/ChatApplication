@@ -143,9 +143,29 @@ namespace ChatApplication_CSharp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap pdf {
+            get {
+                object obj = ResourceManager.GetObject("pdf", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap photo_camera_interface_symbol_for_button {
             get {
                 object obj = ResourceManager.GetObject("photo-camera-interface-symbol-for-button", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap play_button {
+            get {
+                object obj = ResourceManager.GetObject("play-button", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -166,6 +186,16 @@ namespace ChatApplication_CSharp.Properties {
         internal static System.Drawing.Bitmap sticker {
             get {
                 object obj = ResourceManager.GetObject("sticker", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap stop_button {
+            get {
+                object obj = ResourceManager.GetObject("stop-button", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
