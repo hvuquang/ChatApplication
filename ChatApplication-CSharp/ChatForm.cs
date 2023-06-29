@@ -49,8 +49,8 @@ namespace ChatApplication_CSharp
         {
             DataTable userTable = new DataTable();
 
-            //string connectionString = "Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
-            string connectionString = "Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
+            string connectionString = "Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
+            //string connectionString = "Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
             string query = "SELECT username,id FROM userTab";
 
             try
@@ -76,10 +76,15 @@ namespace ChatApplication_CSharp
         private DataTable GetAllGroups()
         {
             DataTable groupTable = new DataTable();
+            groupTable.Columns.Add("id_nhom", typeof(int));
+            groupTable.Columns.Add("id_nguoi_tao", typeof(int));
+            groupTable.Columns.Add("id_thanh_vien", typeof(string));
+            groupTable.Columns.Add("hinh_anh", typeof(Image)); // Thay đổi kiểu dữ liệu thành Image
+            groupTable.Columns.Add("ten_nhom", typeof(string));
 
-            //string connectionString = "Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
-            string connectionString = "Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
-            string query = "SELECT * FROM [Group] WHERE id_nguoi_tao = @id OR id_thanh_vien LIKE '%' + CAST(@id AS NVARCHAR(MAX)) + '%'";
+            string connectionString = "Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
+            //string connectionString = "Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
+            string query = "SELECT id_nhom, id_nguoi_tao, id_thanh_vien, hinh_anh, ten_nhom FROM [Group] WHERE id_nguoi_tao = @id OR id_thanh_vien LIKE '%' + CAST(@id AS NVARCHAR(MAX)) + '%'";
 
             try
             {
@@ -91,9 +96,22 @@ namespace ChatApplication_CSharp
                     {
                         command.Parameters.AddWithValue("@id", id);
 
-                        using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                        using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            adapter.Fill(groupTable);
+                            while (reader.Read())
+                            {
+                                int id_nhom = reader.GetInt32(reader.GetOrdinal("id_nhom"));
+                                int id_nguoi_tao = reader.GetInt32(reader.GetOrdinal("id_nguoi_tao"));
+                                string id_thanh_vien = reader.GetString(reader.GetOrdinal("id_thanh_vien"));
+
+                                // Chuyển đổi byte[] sang Image
+                                byte[] imageBytes = (byte[])reader["hinh_anh"];
+                                Image hinh_anh = ConvertByteArrayToImage(imageBytes);
+
+                                string ten_nhom = reader.GetString(reader.GetOrdinal("ten_nhom"));
+
+                                groupTable.Rows.Add(id_nhom, id_nguoi_tao, id_thanh_vien, hinh_anh, ten_nhom);
+                            }
                         }
                     }
                 }
@@ -105,6 +123,8 @@ namespace ChatApplication_CSharp
 
             return groupTable;
         }
+
+
 
         private void DisplayUsersInDataGridView()
         {
@@ -139,14 +159,15 @@ namespace ChatApplication_CSharp
             dataGridView2.ClearSelection();
             dataGridView2.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView2.AllowUserToAddRows = false;
+            
         }
 
         private DataTable GetAllMessages(int senderId, int receiverId)
         {
             DataTable messageTable = new DataTable();
 
-            //string connectionString = "Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
-            string connectionString = "Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
+            string connectionString = "Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
+            //string connectionString = "Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
             string query = "SELECT * FROM [Message] WHERE (SenderUsername = @senderId AND ReceiverUsername = @receiverId) OR (SenderUsername = @receiverId AND ReceiverUsername = @senderId) ORDER BY SentTime ASC";
 
             try
@@ -179,8 +200,8 @@ namespace ChatApplication_CSharp
         {
             DataTable messageTable = new DataTable();
 
-            //string connectionString = "Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
-            string connectionString = "Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
+            string connectionString = "Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
+            //string connectionString = "Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
             string query = "SELECT * FROM [MessageGroup] WHERE (group_id = @group_id) ORDER BY send_time ASC";
 
             try
@@ -390,8 +411,8 @@ namespace ChatApplication_CSharp
         {
             if (modeChat == "single")
             {
-                //string connectionString = "Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
-                string connectionString = "Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True"; 
+                string connectionString = "Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
+                //string connectionString = "Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True"; 
                 SqlConnection connection = new SqlConnection(connectionString);
                 connection.Open();
                 string query = "INSERT INTO [Message] (SenderUsername, ReceiverUsername, MessageText, SentTime) OUTPUT INSERTED.Id  VALUES (@sender, @receiver, @message, @sentTime)";
@@ -419,8 +440,8 @@ namespace ChatApplication_CSharp
             }
             else if (modeChat == "multi")
             {
-                //string connectionString = "Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
-                string connectionString = "Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
+                string connectionString = "Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
+                //string connectionString = "Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
                 SqlConnection connection = new SqlConnection(connectionString);
                 connection.Open();
                 string query = "INSERT INTO [MessageGroup] (content, sender_id, group_id , send_time) VALUES (@content, @sender_id, @group_id,@send_time)";
@@ -460,8 +481,9 @@ namespace ChatApplication_CSharp
                 string fileExtension = Path.GetExtension(filePath);
 
                 // Process the file or save the path to the database
-                //string connectionString = "Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
-                string connectionString = "Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
+                // ...
+                string connectionString = "Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
+                //string connectionString = "Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
                 SqlConnection connection = new SqlConnection(connectionString);
                 connection.Open();
                 string query = "INSERT INTO [Message] (SenderUsername, ReceiverUsername, img, SentTime, AudioLink, FileLink) VALUES (@sender, @receiver, CONVERT(varbinary(max), @img), @sentTime, @AudioLink, @FileLink)";
@@ -567,12 +589,8 @@ namespace ChatApplication_CSharp
             {
                 if (e.Value != null && e.Value is Image)
                 {
-                    Image originalImage = (Image)e.Value;
-                    int desiredWidth = 50;
-                    int desiredHeight = 50;
-
-                    Image resizedImage = ResizeImage(originalImage, desiredWidth, desiredHeight);
-                    e.Value = resizedImage;
+                    Image image = (Image)e.Value;
+                    e.Value = ResizeImage(image, 50, 50);
                 }
             }
         }
