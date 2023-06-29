@@ -299,9 +299,11 @@ namespace ChatApplication_CSharp
                 }
                 else if (modeChat == "multi")
                 {
+                    MessageBox.Show((row["sender_id"].ToString()));
                     int senderId = int.Parse(row["sender_id"].ToString());
                     if (senderId == id)
                     {
+                        //MessageBox.Show()
                         string message = row["content"].ToString();
                         DateTime sentTime = (DateTime)row["send_time"];
                         Message messageControl = new Message(message, sentTime);
@@ -398,7 +400,7 @@ namespace ChatApplication_CSharp
                 command.Parameters.AddWithValue("@receiver", receiver);
                 command.Parameters.AddWithValue("@message", txtMessage.Text);
                 command.Parameters.AddWithValue("@sentTime", DateTime.Now);
-                command.ExecuteNonQuery();
+                //command.ExecuteNonQuery();
 
                 ////lấy id
                 int generatedId = 0;
