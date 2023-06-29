@@ -74,6 +74,12 @@
     <Compile Include="AudioFile.Designer.cs">
       <DependentUpon>AudioFile.cs</DependentUpon>
     </Compile>
+    <Compile Include="BigImage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BigImage.Designer.cs">
+      <DependentUpon>BigImage.cs</DependentUpon>
+    </Compile>
     <Compile Include="ChatForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -103,6 +109,12 @@
     </Compile>
     <Compile Include="ImageMessage.Designer.cs">
       <DependentUpon>ImageMessage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Images.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Images.Designer.cs">
+      <DependentUpon>Images.cs</DependentUpon>
     </Compile>
     <Compile Include="LoginUC.cs">
       <SubType>UserControl</SubType>
@@ -164,6 +176,9 @@
     <EmbeddedResource Include="AudioFile.resx">
       <DependentUpon>AudioFile.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="BigImage.resx">
+      <DependentUpon>BigImage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ChatForm.resx">
       <DependentUpon>ChatForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -178,6 +193,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ImageMessage.resx">
       <DependentUpon>ImageMessage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Images.resx">
+      <DependentUpon>Images.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginUC.resx">
       <DependentUpon>LoginUC.cs</DependentUpon>
