@@ -21,6 +21,7 @@ namespace ChatApplication_CSharp
         private int hearts;
         private int likes;
         private int laughs;
+        private string mode;
         public Message1()
         {
             InitializeComponent();
@@ -40,6 +41,15 @@ namespace ChatApplication_CSharp
             this.messageID = messageID;
         }
 
+        public Message1(string message, DateTime sentDate, string messageID, string mode)
+        {
+            InitializeComponent();
+            this.message = message;
+            this.sentDate = sentDate;
+            this.messageID = messageID;
+            this.mode = mode;
+        }
+
         private void loadData()
         {
             if (messageID == null)
@@ -49,7 +59,10 @@ namespace ChatApplication_CSharp
             string connectionString = "Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
             string query = "SELECT * FROM [ReactionMessage] WHERE (messageID = @messageID)";
             //SqlCommand command = new SqlCommand(query, connectionString);
-
+            if (mode == "group")
+            {
+                query = "SELECT * FROM [ReactionMessage1] WHERE (messageID = @messageID)";
+            }
 
             try
             {
@@ -102,12 +115,11 @@ namespace ChatApplication_CSharp
 
             loadData();
             //lbTime.Text = sentDate.ToString("dd-MM-yyyy HH:mm");
-            ReactMessage reactMessage = new ReactMessage(hearts, likes, laughs, messageID);
+            ReactMessage reactMessage = new ReactMessage(hearts, likes, laughs, messageID, mode);
             reactMessage.Location = new Point(575, 78);
             reactMessage.BringToFront();
             this.Controls.Add(reactMessage);
             lbMessage.Text = message;
-            //label1.Text = message;
         }
     }
 }
