@@ -51,3 +51,4 @@ C:\Users\HP\Documents\GitHub\ChatApplication\ChatApplication-CSharp\bin\Debug\Sp
 C:\Users\HP\Documents\GitHub\ChatApplication\ChatApplication-CSharp\bin\Debug\Spire.PdfViewer.Forms.xml
 C:\Users\HP\Documents\GitHub\ChatApplication\ChatApplication-CSharp\obj\Debug\ChatApplication-CSharp.csproj.CopyComplete
 C:\Users\HP\Documents\GitHub\ChatApplication\ChatApplication-CSharp\obj\Debug\ChatApplication_CSharp.pdfFile.resources
+C:\Users\HP\Documents\GitHub\ChatApplication\ChatApplication-CSharp\obj\Debug\ChatApplication_CSharp.pdfFile1.resources

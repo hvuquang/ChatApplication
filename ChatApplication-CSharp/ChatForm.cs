@@ -288,6 +288,11 @@ namespace ChatApplication_CSharp
                             AudioFile1 audioFile = new AudioFile1(row["AudioLink"].ToString());
                             flowLayoutPanel1.Controls.Add(audioFile);
                         }
+                        if (row["FileLink"].ToString() != "")
+                        {
+                            pdfFile1 pdfFile = new pdfFile1(row["FileLink"].ToString());
+                            flowLayoutPanel1.Controls.Add(pdfFile);
+                        }
                     }
                 }
                 else if (modeChat == "multi")

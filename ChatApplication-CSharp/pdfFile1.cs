@@ -12,15 +12,15 @@ using System.Windows.Forms;
 namespace ChatApplication_CSharp
 {
 
-    public partial class pdfFile : UserControl
+    public partial class pdfFile1 : UserControl
     {
         string fileName = "";
-        public pdfFile()
+        public pdfFile1()
         {
             InitializeComponent();
         }
 
-        public pdfFile(string fileName)
+        public pdfFile1(string fileName)
         {
             InitializeComponent();
             this.fileName = fileName;
@@ -46,7 +46,7 @@ namespace ChatApplication_CSharp
             }
             btnFileName.Text = name;
             label1.Text = value;
-            label1.Location = new Point(555, 35);
+            label1.Location = new Point(89, 55);
         }
 
         void openFile()

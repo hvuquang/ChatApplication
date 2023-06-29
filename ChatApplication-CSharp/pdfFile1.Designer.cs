@@ -1,6 +1,6 @@
 ﻿namespace ChatApplication_CSharp
 {
-    partial class pdfFile
+    partial class pdfFile1
     {
         /// <summary> 
         /// Required designer variable.
@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.btnFileName = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -40,7 +40,7 @@
             this.btnFileName.FlatAppearance.BorderSize = 0;
             this.btnFileName.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFileName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFileName.Location = new System.Drawing.Point(549, 5);
+            this.btnFileName.Location = new System.Drawing.Point(85, 20);
             this.btnFileName.Name = "btnFileName";
             this.btnFileName.Size = new System.Drawing.Size(103, 27);
             this.btnFileName.TabIndex = 0;
@@ -48,37 +48,36 @@
             this.btnFileName.UseVisualStyleBackColor = true;
             this.btnFileName.Click += new System.EventHandler(this.btnFileName_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.Gray;
-            this.label1.Location = new System.Drawing.Point(555, 35);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(41, 15);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "label1";
-            // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::ChatApplication_CSharp.Properties.Resources.pdf;
-            this.pictureBox1.Location = new System.Drawing.Point(474, 5);
+            this.pictureBox1.Location = new System.Drawing.Point(3, 4);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(75, 75);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.Gray;
+            this.label1.Location = new System.Drawing.Point(69, 46);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(41, 15);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "label1";
+            // 
             // pdfFile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSize = true;
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btnFileName);
             this.Name = "pdfFile";
-            this.Size = new System.Drawing.Size(837, 83);
+            this.Size = new System.Drawing.Size(589, 83);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

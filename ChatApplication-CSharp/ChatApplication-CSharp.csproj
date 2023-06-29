@@ -123,6 +123,12 @@
       <DependentUpon>Message1.cs</DependentUpon>
     </Compile>
     <Compile Include="Mp3Player.cs" />
+    <Compile Include="pdfFile1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="pdfFile1.Designer.cs">
+      <DependentUpon>pdfFile1.cs</DependentUpon>
+    </Compile>
     <Compile Include="pdfFile.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -181,6 +187,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Message1.resx">
       <DependentUpon>Message1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pdfFile1.resx">
+      <DependentUpon>pdfFile1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="pdfFile.resx">
       <DependentUpon>pdfFile.cs</DependentUpon>
