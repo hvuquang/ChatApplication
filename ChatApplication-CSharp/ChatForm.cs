@@ -874,8 +874,8 @@ namespace ChatApplication_CSharp
                 pictureBox2.Image = Image.FromFile(open.FileName);
             }
             byte[] b = ImageToByteArray(pictureBox2.Image);
-            SqlConnection connection = new SqlConnection("Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True");
-            //SqlConnection connection = new SqlConnection("Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True");
+            //SqlConnection connection = new SqlConnection("Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True");
+            SqlConnection connection = new SqlConnection("Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True");
             connection.Open();
             SqlCommand cmd = new SqlCommand("UPDATE [userTab] SET image = @image WHERE id = @id", connection);
             cmd.Parameters.AddWithValue("@id", id);

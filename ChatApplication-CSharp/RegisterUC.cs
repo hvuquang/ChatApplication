@@ -23,6 +23,7 @@ namespace ChatApplication_CSharp
         {
             //SqlConnection connection = new SqlConnection("Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True");
             SqlConnection connection = new SqlConnection("Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True");
+            byte[] b = ImageToByteArray(pictureBox1.Image);
             connection.Open();
             SqlCommand cmd = new SqlCommand("insert into [userTab] values (@username , @password , @email , @image)", connection);
             cmd.Parameters.AddWithValue("@username", txtUsername.Text);
