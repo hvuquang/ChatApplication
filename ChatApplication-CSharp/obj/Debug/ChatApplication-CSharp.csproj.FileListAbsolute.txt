@@ -52,3 +52,5 @@ C:\Users\HP\Documents\GitHub\ChatApplication\ChatApplication-CSharp\bin\Debug\Sp
 C:\Users\HP\Documents\GitHub\ChatApplication\ChatApplication-CSharp\obj\Debug\ChatApplication-CSharp.csproj.CopyComplete
 C:\Users\HP\Documents\GitHub\ChatApplication\ChatApplication-CSharp\obj\Debug\ChatApplication_CSharp.pdfFile.resources
 C:\Users\HP\Documents\GitHub\ChatApplication\ChatApplication-CSharp\obj\Debug\ChatApplication_CSharp.pdfFile1.resources
+C:\Users\HP\Documents\GitHub\ChatApplication\ChatApplication-CSharp\obj\Debug\ChatApplication_CSharp.Images.resources
+C:\Users\HP\Documents\GitHub\ChatApplication\ChatApplication-CSharp\obj\Debug\ChatApplication_CSharp.BigImage.resources

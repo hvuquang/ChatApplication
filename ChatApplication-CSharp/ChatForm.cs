@@ -24,6 +24,7 @@ namespace ChatApplication_CSharp
         private String modeChat = "";
         private int group_id;
         private DataTable lastMessageGroupTable;
+        private Images Images;
 
         public ChatForm()
         {
@@ -218,6 +219,7 @@ namespace ChatApplication_CSharp
 
         private void DisplayMessagesInFlowLayoutPanel(DataTable messageTable)
         {
+            Images = new Images(messageTable);
             flowLayoutPanel1.Controls.Clear();
 
             byte[] imageData = null;
@@ -595,6 +597,12 @@ namespace ChatApplication_CSharp
                 DataTable dt = GetAllMessagesInGroup(group_id);
                 DisplayMessagesInFlowLayoutPanel(dt);
             }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            Images.Show();
+            Images.BringToFront();
         }
     }
 }
