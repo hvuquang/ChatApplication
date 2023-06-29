@@ -48,7 +48,8 @@ namespace ChatApplication_CSharp
 
         private void GetRowById(int id)
         {
-            SqlConnection connection = new SqlConnection("Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True");
+            //SqlConnection connection = new SqlConnection("Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True");
+            SqlConnection connection = new SqlConnection("Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True");
             connection.Open();
 
             SqlCommand cmd = new SqlCommand("SELECT username, password, email, image FROM [userTab] WHERE id = @id", connection);
@@ -227,7 +228,7 @@ namespace ChatApplication_CSharp
 
         private void DisplayGroupsInDataGridView(DataTable groupTable)
         {
-            dataGridView2.Rows.Clear();
+            //dataGridView2.Rows.Clear();
             dataGridView2.DataSource = groupTable;
             dataGridView2.ColumnHeadersVisible = false;
             dataGridView2.RowHeadersVisible = false;
@@ -645,7 +646,6 @@ namespace ChatApplication_CSharp
             }
             else if (modeChat == "multi")
             {
-                MessageBox.Show("run");
                 //string connectionString = "Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
                 string connectionString = "Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
                 SqlConnection connection = new SqlConnection(connectionString);
@@ -862,6 +862,11 @@ namespace ChatApplication_CSharp
 
         private void button6_Click(object sender, EventArgs e)
         {
+            if (Images == null)
+            {
+                MessageBox.Show("Hiện tại vẫn chưa chia sẻ hình ảnh nào");
+                return;
+            }
             Images.Show();
             Images.BringToFront();
         }

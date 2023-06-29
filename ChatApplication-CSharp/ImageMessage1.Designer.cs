@@ -35,8 +35,7 @@
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pictureBox1.Location = new System.Drawing.Point(140, 0);
+            this.pictureBox1.Location = new System.Drawing.Point(68, 0);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(250, 250);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -51,7 +50,7 @@
             this.Controls.Add(this.pictureBox1);
             this.Name = "ImageMessage1";
             this.Padding = new System.Windows.Forms.Padding(140, 0, 0, 0);
-            this.Size = new System.Drawing.Size(712, 250);
+            this.Size = new System.Drawing.Size(837, 250);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 

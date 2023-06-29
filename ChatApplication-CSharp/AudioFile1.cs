@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,11 +16,15 @@ namespace ChatApplication_CSharp
     {
         private Mp3Player Mp3Player = new Mp3Player();
         private string AudioLink = "";
+        private string name = "";
         public AudioFile1(string AudioLink)
         {
             InitializeComponent();
             this.AudioLink = AudioLink;
             Mp3Player.open(AudioLink);
+            FileInfo fileInfo = new FileInfo(AudioLink);
+            this.name = fileInfo.Name;
+            label1.Text = fileInfo.Name;
         }
 
         private void button1_Click(object sender, EventArgs e)
