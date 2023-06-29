@@ -25,6 +25,7 @@ namespace ChatApplication_CSharp
         private int group_id;
         private DataTable lastMessageGroupTable;
         private Images Images;
+        private DataTable lastGroupTable;
 
         public ChatForm()
         {
@@ -43,6 +44,39 @@ namespace ChatApplication_CSharp
             this.id = id;
             InitializeTimer();
             timer.Start();
+        }
+
+        private void GetRowById(int id)
+        {
+            SqlConnection connection = new SqlConnection("Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True");
+            connection.Open();
+
+            SqlCommand cmd = new SqlCommand("SELECT username, password, email, image FROM [userTab] WHERE id = @id", connection);
+            cmd.Parameters.AddWithValue("@id", id);
+
+            SqlDataReader reader = cmd.ExecuteReader();
+            if (reader.Read())
+            {
+                string username = reader["username"].ToString();
+                string password = reader["password"].ToString();
+                string email = reader["email"].ToString();
+                byte[] imageBytes = (byte[])reader["image"];
+
+                // Gán tên người dùng vào Label
+                label3.Text = username;
+
+                // Gán hình ảnh vào PictureBox
+                if (imageBytes != null && imageBytes.Length > 0)
+                {
+                    using (MemoryStream ms = new MemoryStream(imageBytes))
+                    {
+                        pictureBox2.Image = Image.FromStream(ms);
+                    }
+                }
+            }
+
+            reader.Close();
+            connection.Close();
         }
 
         private DataTable GetAllUsers()
@@ -124,6 +158,56 @@ namespace ChatApplication_CSharp
             return groupTable;
         }
 
+        private DataTable GetBackgrounds(int id_nguoi1, int id_nguoi2)
+        {
+            DataTable backgroundTable = new DataTable();
+            backgroundTable.Columns.Add("id_bg", typeof(int));
+            backgroundTable.Columns.Add("id_nguoi1", typeof(int));
+            backgroundTable.Columns.Add("id_nguoi2", typeof(int));
+            backgroundTable.Columns.Add("id_group", typeof(int));
+            backgroundTable.Columns.Add("hinh_anh", typeof(Image)); // Thay đổi kiểu dữ liệu thành Image
+
+            string connectionString = "Your_Connection_String";
+            string query = "SELECT id_bg, id_nguoi1, id_nguoi2, id_group, hinh_anh FROM Background WHERE id_nguoi1 = @id_nguoi1 AND id_nguoi2 = @id_nguoi2";
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@id_nguoi1", id_nguoi1);
+                        command.Parameters.AddWithValue("@id_nguoi2", id_nguoi2);
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                int id_bg = reader.GetInt32(reader.GetOrdinal("id_bg"));
+                                int id_nguoiMot = reader.GetInt32(reader.GetOrdinal("id_nguoi1"));
+                                int id_nguoiHai = reader.GetInt32(reader.GetOrdinal("id_nguoi2"));
+                                int id_group = reader.GetInt32(reader.GetOrdinal("id_group"));
+
+                                // Chuyển đổi byte[] sang Image
+                                byte[] imageBytes = (byte[])reader["hinh_anh"];
+                                Image hinh_anh = ConvertByteArrayToImage(imageBytes);
+
+                                backgroundTable.Rows.Add(id_bg, id_nguoi1, id_nguoi2, id_group, hinh_anh);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Đã xảy ra lỗi: " + ex.Message);
+            }
+
+            return backgroundTable;
+        }
+
 
 
         private void DisplayUsersInDataGridView()
@@ -141,9 +225,9 @@ namespace ChatApplication_CSharp
             dataGridView1.Columns["id"].Visible = false;
         }
 
-        private void DisplayGroupsInDataGridView()
+        private void DisplayGroupsInDataGridView(DataTable groupTable)
         {
-            DataTable groupTable = GetAllGroups();
+            dataGridView2.Rows.Clear();
             dataGridView2.DataSource = groupTable;
             dataGridView2.ColumnHeadersVisible = false;
             dataGridView2.RowHeadersVisible = false;
@@ -161,6 +245,69 @@ namespace ChatApplication_CSharp
             dataGridView2.AllowUserToAddRows = false;
             
         }
+
+        private void DisplayBackgroundImage(int id_nguoi1, int id_nguoi2)
+        {
+            DataTable backgrounds = GetBackgrounds(id_nguoi1, id_nguoi2);
+            if (backgrounds.Rows.Count > 0)
+            {
+                Image hinh_anh = (Image)backgrounds.Rows[0]["hinh_anh"];
+                flowLayoutPanel1.BackgroundImage = hinh_anh;
+            }
+            else
+            {
+                // Nếu không tìm thấy background, gán màu trắng cho flowLayoutPanel1.BackgroundImage
+                Bitmap whiteImage = new Bitmap(1, 1);
+                using (Graphics graphics = Graphics.FromImage(whiteImage))
+                {
+                    graphics.FillRectangle(Brushes.White, new Rectangle(0, 0, 1, 1));
+                }
+                flowLayoutPanel1.BackgroundImage = whiteImage;
+            }
+        }
+
+        //private void UpdateIdThanhVien(int nhomId, int id)
+        //{
+        //    string connectionString = "Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True"; // Thay thế bằng chuỗi kết nối của bạn
+
+        //    using (SqlConnection connection = new SqlConnection(connectionString))
+        //    {
+        //        connection.Open();
+
+        //        string selectQuery = "SELECT id_thanh_vien FROM [Group] WHERE id_nhom = @nhomId";
+        //        SqlCommand selectCommand = new SqlCommand(selectQuery, connection);
+        //        selectCommand.Parameters.AddWithValue("@nhomId", nhomId);
+        //        SqlDataReader reader = selectCommand.ExecuteReader();
+
+        //        if (reader.Read())
+        //        {
+        //            string idThanhVien = reader["id_thanh_vien"].ToString();
+
+        //            // Tách các giá trị trong id_thanh_vien thành mảng
+        //            string[] idThanhVienArray = idThanhVien.Split(',');
+
+        //            // Tạo danh sách mới chứa các giá trị khác id
+        //            List<string> newIdThanhVienList = new List<string>();
+        //            foreach (string value in idThanhVienArray)
+        //            {
+        //                if (value != id.ToString())
+        //                {
+        //                    newIdThanhVienList.Add(value);
+        //                }
+        //            }
+
+        //            // Cập nhật lại trường id_thanh_vien trong bảng Group
+        //            string newIdThanhVien = string.Join(",", newIdThanhVienList.ToArray());
+        //            string updateQuery = "UPDATE [Group] SET id_thanh_vien = @newIdThanhVien WHERE id_nhom = @nhomId";
+        //            SqlCommand updateCommand = new SqlCommand(updateQuery, connection);
+        //            updateCommand.Parameters.AddWithValue("@newIdThanhVien", newIdThanhVien);
+        //            updateCommand.Parameters.AddWithValue("@nhomId", nhomId);
+        //            updateCommand.ExecuteNonQuery();
+        //        }
+
+        //        reader.Close();
+        //    }
+        //}
 
         private DataTable GetAllMessages(int senderId, int receiverId)
         {
@@ -342,7 +489,10 @@ namespace ChatApplication_CSharp
         private void ChatForm_Load(object sender, EventArgs e)
         {
             DisplayUsersInDataGridView();
-            DisplayGroupsInDataGridView();
+            DataTable dtGroup = GetAllGroups();
+            DisplayGroupsInDataGridView(dtGroup);
+            //DisplayBackgroundImage(id, receiver);
+            GetRowById(id);
         }
 
         private void LoadLatestMessages()
@@ -358,6 +508,12 @@ namespace ChatApplication_CSharp
             {
                 lastMessageGroupTable = currentGroupTable;
                 DisplayMessagesInFlowLayoutPanel(lastMessageGroupTable);
+            }
+            DataTable currentGroup = GetAllGroups();
+            if (lastGroupTable == null || !lastGroupTable.Rows.Cast<DataRow>().SequenceEqual(currentGroup.Rows.Cast<DataRow>(), DataRowComparer.Default))
+            {
+                lastGroupTable = currentGroup;
+                DisplayGroupsInDataGridView(lastGroupTable);
             }
         }
 
@@ -419,7 +575,7 @@ namespace ChatApplication_CSharp
                 command.Parameters.AddWithValue("@receiver", receiver);
                 command.Parameters.AddWithValue("@message", txtMessage.Text);
                 command.Parameters.AddWithValue("@sentTime", DateTime.Now);
-                command.ExecuteNonQuery();
+                //command.ExecuteNonQuery();
 
                 ////lấy id
                 int generatedId = 0;
@@ -561,6 +717,7 @@ namespace ChatApplication_CSharp
         private void btnChangeScreen_Click(object sender, EventArgs e)
         {
             //flowLayoutPanel1.BackColor = Color.Black;
+
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.InitialDirectory = "C:\\";
             openFileDialog.Filter = "Image Files (*.jpg; *.png; *.gif)|*.jpg;*.png;*.gif";
@@ -569,6 +726,28 @@ namespace ChatApplication_CSharp
                 string filePath = openFileDialog.FileName;
                 flowLayoutPanel1.BackgroundImage = Image.FromFile(filePath);
             }
+            //if(modeChat == "single")
+            //{
+            //    byte[] b = ImageToByteArray(flowLayoutPanel1.BackgroundImage);
+            //    SqlConnection connection = new SqlConnection("Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True");
+            //    //SqlConnection connection = new SqlConnection("Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True");
+            //    connection.Open();
+            //    SqlCommand cmd = new SqlCommand("insert into [Background] values (@id_nguoi1 , @id_nguoi2 , @id_group , @hinh_anh)", connection);
+            //    cmd.Parameters.AddWithValue("@id_nguoi1", id);
+            //    cmd.Parameters.AddWithValue("@id_nguoi2", receiver);
+            //    cmd.Parameters.AddWithValue("@id_group", 0);
+            //    cmd.Parameters.AddWithValue("@hinh_anh", b);
+            //    cmd.ExecuteNonQuery();
+            //    connection.Close();
+            //    MessageBox.Show("Đổi background thành công");
+            //}
+        }
+
+        byte[] ImageToByteArray(Image img)
+        {
+            MemoryStream m = new MemoryStream();
+            img.Save(m, System.Drawing.Imaging.ImageFormat.Png);
+            return m.ToArray();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -621,6 +800,24 @@ namespace ChatApplication_CSharp
         {
             Images.Show();
             Images.BringToFront();
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog open = new OpenFileDialog();
+            if (open.ShowDialog() == DialogResult.OK)
+            {
+                pictureBox2.Image = Image.FromFile(open.FileName);
+            }
+            byte[] b = ImageToByteArray(pictureBox2.Image);
+            SqlConnection connection = new SqlConnection("Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True");
+            //SqlConnection connection = new SqlConnection("Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True");
+            connection.Open();
+            SqlCommand cmd = new SqlCommand("UPDATE [userTab] SET image = @image WHERE id = @id", connection);
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.Parameters.AddWithValue("@image", b);
+            cmd.ExecuteNonQuery();
+            connection.Close();
         }
     }
 }

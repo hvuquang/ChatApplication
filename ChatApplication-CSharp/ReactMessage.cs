@@ -38,7 +38,8 @@ namespace ChatApplication_CSharp
         private void updateData()
         {
             string updateQuery = "UPDATE [ReactionMessage] SET hearts = @heart, likes = @like, laughs = @laugh WHERE messageID = @messageID";
-            string connectionString = "Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
+            String connectionString = "Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
+            //string connectionString = "Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True";
             try
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))

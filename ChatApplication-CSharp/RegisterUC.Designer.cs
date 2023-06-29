@@ -37,6 +37,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txtConfirm = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -141,11 +143,23 @@
             this.label4.TabIndex = 12;
             this.label4.Text = "Xác nhận mật khẩu";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::ChatApplication_CSharp.Properties.Resources.user__5_;
+            this.pictureBox1.Location = new System.Drawing.Point(184, 485);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(100, 50);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 14;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Visible = false;
+            // 
             // RegisterUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.txtConfirm);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txtPass);
@@ -157,6 +171,7 @@
             this.Controls.Add(this.label1);
             this.Name = "RegisterUC";
             this.Size = new System.Drawing.Size(462, 572);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -173,5 +188,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtConfirm;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
