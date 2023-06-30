@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace ChatApplication_CSharp
 {
@@ -17,6 +19,7 @@ namespace ChatApplication_CSharp
         private string groupID;
         private string userID;
         private string[] substrings;
+        private List<string> listOfUser = new List<string>();
         private string userInGroupWithcomma;
         private string idFromChatForm;
         private DataTable groupDataTable;
@@ -40,9 +43,7 @@ namespace ChatApplication_CSharp
             InitializeComponent();
             this.groupID = groupID;
             this.idFromChatForm = id;
-            loadUserInGroup();
-            getUserInGroup();
-            readUserData();
+            dataGridView1.Columns["Delete"].Visible = false;
         }
 
         private void loadUserInGroup()
@@ -74,7 +75,9 @@ namespace ChatApplication_CSharp
             groupDataTable = new DataTable();
             groupDataTable.Columns.Add("image", typeof(Image));
             groupDataTable.Columns.Add("username", typeof(string));
+            groupDataTable.Columns.Add("id", typeof(int));
             groupDataTable.Columns.Add("email", typeof(string));
+            groupDataTable.Columns.Add("delete", typeof(bool));
             //MessageBox.Show(userID.Length.ToString());
             for (int i =0; i< substrings.Length;i++)
             {
@@ -89,12 +92,14 @@ namespace ChatApplication_CSharp
                         string username = "";
                         string email = "";
                         byte[] image;
+                        bool delete = false;
+                        int id = (int)reader["ID"];
                         username = (string)reader["username"];
                         email = (string)reader["email"];
                         image = (byte[])reader["image"];
                         Image im = ConvertByteArrayToImage(image);
-                        groupDataTable.Rows.Add(im, username, email);
-                        dataGridView1.Rows.Add(im, username, email);
+                        //groupDataTable.Rows.Add(im, username, email);
+                        dataGridView1.Rows.Add(id, im, username, email, delete);
                     }
                     reader.Close();
                 }
@@ -177,7 +182,96 @@ namespace ChatApplication_CSharp
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
+            if(listOfUser.Count > 0)
+            {
+                //MessageBox.Show(listOfUser[0]);
+                for (int i = 0; i < listOfUser.Count; i++)
+                {
+                    UpdateIdThanhVien(Int32.Parse(groupID), Int32.Parse(listOfUser[i]));
+                }
+                return;
+            }
+            using (SqlConnection connection = new SqlConnection("Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True"))
+            {
+                connection.Open();
 
+                string deleteQuery = "DELETE FROM [Group] WHERE id_nhom = @GroupID";
+
+                using (SqlCommand command = new SqlCommand(deleteQuery, connection))
+                {
+                    command.Parameters.AddWithValue("@GroupID", groupID);
+
+                    int rowsAffected = command.ExecuteNonQuery();
+
+                    if (rowsAffected > 0)
+                    {
+                        MessageBox.Show("Row deleted successfully.");
+                    }
+                    else
+                    {
+                        MessageBox.Show("No rows deleted.");
+                    }
+                }
+            }
+
+        }
+
+        private void GroupDetail_Load(object sender, EventArgs e)
+        {
+            loadUserInGroup();
+            getUserInGroup();
+            readUserData();
+            int val = 0;
+            SqlConnection connection = new SqlConnection("Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True");
+            connection.Open();
+            SqlCommand cmd1 = new SqlCommand("select * from [Group] where (id_nhom = @groupID)", connection);
+            cmd1.Parameters.AddWithValue("@groupID", groupID);
+            using (SqlDataReader reader = cmd1.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    val = (int)reader["id_nguoi_tao"];
+                }
+                reader.Close();
+            }
+            connection.Close();
+            if (val.ToString() == idFromChatForm)
+            {
+                btnXoa.Visible = true;
+                dataGridView1.Columns["Delete"].Visible = true;
+            }
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        { 
+            if (e.ColumnIndex == dataGridView1.Columns["Delete"].Index && e.RowIndex >= 0)
+            {
+               
+                object checkboxCell = dataGridView1.Rows[e.RowIndex].Cells[4].Value;
+                bool isChecked = (bool)checkboxCell;
+                if (isChecked == true)
+                {
+                    isChecked = false;
+                    dataGridView1.Rows[e.RowIndex].Cells[4].Value = false;
+                }
+                else
+                {
+                    isChecked = true;
+                    dataGridView1.Rows[e.RowIndex].Cells[4].Value = true;
+                }
+                object userid = dataGridView1.Rows[e.RowIndex].Cells[0].Value;
+                string id = "";
+                id = userid.ToString();
+                // Perform actions based on the checked state
+                if (isChecked == true)
+                {
+                    listOfUser.Add(id);
+                }
+                else
+                {
+                    listOfUser.RemoveAt(listOfUser.Count - 1);
+                }
+            }
         }
     }
 }
