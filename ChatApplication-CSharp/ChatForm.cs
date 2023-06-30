@@ -316,16 +316,32 @@ namespace ChatApplication_CSharp
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@group_id", group_id);
 
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlDataReader reader = command.ExecuteReader())
                     {
-                        command.Parameters.AddWithValue("@group_id", group_id);
-
+                        if (!reader.HasRows)
+                        {
+                            return messageTable;
+                        }
+                        reader.Close();
                         using (SqlDataAdapter adapter = new SqlDataAdapter(command))
                         {
                             adapter.Fill(messageTable);
                         }
+
                     }
+
+                    //using (SqlCommand command = new SqlCommand(query, connection))
+                    //{
+                    //    command.Parameters.AddWithValue("@group_id", group_id);
+
+                    //    using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                    //    {
+                    //        adapter.Fill(messageTable);
+                    //    }
+                    //}
                 }
             }
             catch (Exception ex)
@@ -434,54 +450,68 @@ namespace ChatApplication_CSharp
                     int senderId = int.Parse(row["sender_id"].ToString());
                     if (senderId == id)
                     {
-                        //MessageBox.Show()
                         string message = row["content"].ToString();
-                        DateTime sentTime = (DateTime)row["send_time"];
-                        Message messageControl = new Message(message, sentTime, messageID, "group");
-                        flowLayoutPanel1.Controls.Add(messageControl);
-                        if (row["img"].ToString() != "")
+                        if (message != "")
                         {
-                            ImageMessage imageMessage = new ImageMessage();
-                            imageData = (byte[])row["img"];
-                            image = ConvertByteArrayToImage(imageData);
-                            imageMessage.pictureBox1.Image = image;
-                            flowLayoutPanel1.Controls.Add(imageMessage);
+                            DateTime sentTime = (DateTime)row["send_time"];
+                            Message messageControl = new Message(message, sentTime, messageID, "group");
+                            flowLayoutPanel1.Controls.Add(messageControl);
                         }
-                        if (row["AudioLink"].ToString() != "")
+                        else
                         {
-                            AudioFile audioFile = new AudioFile(row["AudioLink"].ToString());
-                            flowLayoutPanel1.Controls.Add(audioFile);
+                            if (row["img"].ToString() != "")
+                            {
+                                ImageMessage imageMessage = new ImageMessage();
+                                imageData = (byte[])row["img"];
+                                image = ConvertByteArrayToImage(imageData);
+                                imageMessage.pictureBox1.Image = image;
+                                flowLayoutPanel1.Controls.Add(imageMessage);
+                            }
+                            if (row["AudioLink"].ToString() != "")
+                            {
+                                AudioFile audioFile = new AudioFile(row["AudioLink"].ToString());
+                                flowLayoutPanel1.Controls.Add(audioFile);
+                            }
+                            if (row["FileLink"].ToString() != "")
+                            {
+                                pdfFile pdfFile = new pdfFile(row["FileLink"].ToString());
+                                flowLayoutPanel1.Controls.Add(pdfFile);
+                            }
                         }
-                        if (row["FileLink"].ToString() != "")
-                        {
-                            pdfFile pdfFile = new pdfFile(row["FileLink"].ToString());
-                            flowLayoutPanel1.Controls.Add(pdfFile);
-                        }
+
                     }
                     else
                     {
                         string message = row["content"].ToString();
-                        DateTime sentTime = (DateTime)row["send_time"];
-                        Message1 messageControl = new Message1(message, sentTime, messageID, "group");
-                        flowLayoutPanel1.Controls.Add(messageControl);
-                        if (row["img"].ToString() != "")
+                        if (message != "")
                         {
-                            ImageMessage1 imageMessage = new ImageMessage1();
-                            imageData = (byte[])row["img"];
-                            image = ConvertByteArrayToImage(imageData);
-                            imageMessage.pictureBox1.Image = image;
-                            flowLayoutPanel1.Controls.Add(imageMessage);
+                            DateTime sentTime = (DateTime)row["send_time"];
+                            Message1 messageControl = new Message1(message, sentTime, messageID, "group");
+                            flowLayoutPanel1.Controls.Add(messageControl);
                         }
-                        if (row["AudioLink"].ToString() != "")
+                        else
                         {
-                            AudioFile1 audioFile = new AudioFile1(row["AudioLink"].ToString());
-                            flowLayoutPanel1.Controls.Add(audioFile);
+                            if (row["img"].ToString() != "")
+                            {
+                                ImageMessage1 imageMessage = new ImageMessage1();
+                                imageData = (byte[])row["img"];
+                                image = ConvertByteArrayToImage(imageData);
+                                imageMessage.pictureBox1.Image = image;
+                                flowLayoutPanel1.Controls.Add(imageMessage);
+                            }
+                            if (row["AudioLink"].ToString() != "")
+                            {
+                                AudioFile1 audioFile = new AudioFile1(row["AudioLink"].ToString());
+                                flowLayoutPanel1.Controls.Add(audioFile);
+                            }
+                            if (row["FileLink"].ToString() != "")
+                            {
+                                pdfFile1 pdfFile = new pdfFile1(row["FileLink"].ToString());
+                                flowLayoutPanel1.Controls.Add(pdfFile);
+                            }
                         }
-                        if (row["FileLink"].ToString() != "")
-                        {
-                            pdfFile1 pdfFile = new pdfFile1(row["FileLink"].ToString());
-                            flowLayoutPanel1.Controls.Add(pdfFile);
-                        }
+
+
                     }
                 }
 
@@ -691,6 +721,10 @@ namespace ChatApplication_CSharp
                 SqlConnection connection = new SqlConnection(connectionString);
                 connection.Open();
                 string query = "INSERT INTO [Message] (SenderUsername, ReceiverUsername, img, SentTime, AudioLink, FileLink) VALUES (@sender, @receiver, CONVERT(varbinary(max), @img), @sentTime, @AudioLink, @FileLink)";
+                if (modeChat == "multi")
+                {
+                    query = "INSERT INTO [MessageGroup] (send_time, sender_id, group_id, AudioLink, FileLink, img) VALUES (@send_time, @sender_id, @group_id, @AudioLink, @FileLink, CONVERT(varbinary(max), @img))";
+                }
                 SqlCommand command = new SqlCommand(query, connection);
 
                 // Read the file as binary data
@@ -700,37 +734,68 @@ namespace ChatApplication_CSharp
                 if (fileExtension == ".jpg" || fileExtension == ".png" || fileExtension == ".gif")
                 {
                     binaryData = File.ReadAllBytes(filePath);
-                    command.Parameters.AddWithValue("@sender", id);
-                    command.Parameters.AddWithValue("@receiver", receiver);
-                    command.Parameters.AddWithValue("@img", binaryData);
-                    command.Parameters.AddWithValue("@sentTime", DateTime.Now);
-                    command.Parameters.AddWithValue("@AudioLink", DBNull.Value);
-                    command.Parameters.AddWithValue("@FileLink", DBNull.Value);
+                    if (modeChat == "single")
+                    {
+                        command.Parameters.AddWithValue("@sender", id);
+                        command.Parameters.AddWithValue("@receiver", receiver);
+                        command.Parameters.AddWithValue("@img", binaryData);
+                        command.Parameters.AddWithValue("@sentTime", DateTime.Now);
+                        command.Parameters.AddWithValue("@AudioLink", DBNull.Value);
+                        command.Parameters.AddWithValue("@FileLink", DBNull.Value);
+                    }
+                    else if (modeChat =="multi")
+                    {
+                        command.Parameters.AddWithValue("@sender_id", id);
+                        command.Parameters.AddWithValue("@group_id", group_id);
+                        command.Parameters.AddWithValue("@AudioLink", DBNull.Value);
+                        command.Parameters.AddWithValue("@FileLink", DBNull.Value);
+                        command.Parameters.AddWithValue("@img", binaryData);
+                        command.Parameters.AddWithValue("@send_time", DateTime.Now);
+                    }
                 }
                 else if (fileExtension == ".mp3")
                 {
                     AudioLink = filePath;
-                    //MessageBox.Show(AudioLink);
-                    command.Parameters.AddWithValue("@sender", id);
-                    command.Parameters.AddWithValue("@receiver", receiver);
-                    command.Parameters.AddWithValue("@img", DBNull.Value);
-                    command.Parameters.AddWithValue("@sentTime", DateTime.Now);
-                    command.Parameters.AddWithValue("@AudioLink", AudioLink);
-                    command.Parameters.AddWithValue("@FileLink", DBNull.Value);
+                    if (modeChat == "single")
+                    {
+                        command.Parameters.AddWithValue("@sender", id);
+                        command.Parameters.AddWithValue("@receiver", receiver);
+                        command.Parameters.AddWithValue("@img", DBNull.Value);
+                        command.Parameters.AddWithValue("@sentTime", DateTime.Now);
+                        command.Parameters.AddWithValue("@AudioLink", AudioLink);
+                        command.Parameters.AddWithValue("@FileLink", DBNull.Value);
+                    }
+                    else if (modeChat == "multi")
+                    {
+                        command.Parameters.AddWithValue("@sender_id", id);
+                        command.Parameters.AddWithValue("@group_id", group_id);
+                        command.Parameters.AddWithValue("@AudioLink", AudioLink);
+                        command.Parameters.AddWithValue("@FileLink", DBNull.Value);
+                        command.Parameters.AddWithValue("@img", DBNull.Value);
+                        command.Parameters.AddWithValue("@send_time", DateTime.Now);
+                    }
                 }
                 else if (fileExtension == ".pdf")
                 {
                     FileLink = filePath;
-                    command.Parameters.AddWithValue("@sender", id);
-                    command.Parameters.AddWithValue("@receiver", receiver);
-                    command.Parameters.AddWithValue("@img", DBNull.Value);
-                    command.Parameters.AddWithValue("@sentTime", DateTime.Now);
-                    command.Parameters.AddWithValue("@AudioLink", DBNull.Value);
-                    command.Parameters.AddWithValue("@FileLink", FileLink);
-
-                    //SettingForm settingForm = new SettingForm(filePath);
-                    //settingForm.Show();
-                    //settingForm.BringToFront();
+                    if (modeChat == "single")
+                    {
+                        command.Parameters.AddWithValue("@sender", id);
+                        command.Parameters.AddWithValue("@receiver", receiver);
+                        command.Parameters.AddWithValue("@img", DBNull.Value);
+                        command.Parameters.AddWithValue("@sentTime", DateTime.Now);
+                        command.Parameters.AddWithValue("@AudioLink", DBNull.Value);
+                        command.Parameters.AddWithValue("@FileLink", FileLink);
+                    }
+                    else if (modeChat == "multi")
+                    {
+                        command.Parameters.AddWithValue("@sender_id", id);
+                        command.Parameters.AddWithValue("@group_id", group_id);
+                        command.Parameters.AddWithValue("@AudioLink", DBNull.Value);
+                        command.Parameters.AddWithValue("@FileLink", FileLink);
+                        command.Parameters.AddWithValue("@img", DBNull.Value);
+                        command.Parameters.AddWithValue("@send_time", DateTime.Now);
+                    }
                 }
 
                 command.ExecuteNonQuery();
@@ -777,8 +842,7 @@ namespace ChatApplication_CSharp
                 string filePath = openFileDialog.FileName;
                 flowLayoutPanel1.BackgroundImage = Image.FromFile(filePath);
             }
-            //if(modeChat == "single")
-            //{
+            else return;
             byte[] b = ImageToByteArray(flowLayoutPanel1.BackgroundImage);
             //SqlConnection connection = new SqlConnection("Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True");
             SqlConnection connection = new SqlConnection("Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True");
@@ -866,7 +930,7 @@ namespace ChatApplication_CSharp
                 DataGridViewRow row = dataGridView2.Rows[e.RowIndex];
                 string idString = row.Cells["id_nhom"].Value.ToString();
                 group_id = Int32.Parse(idString);
-                MessageBox.Show(modeChat + "_" + group_id);
+                //MessageBox.Show(modeChat + "_" + group_id);
                 DataTable dt = GetAllMessagesInGroup(group_id);
                 DisplayMessagesInFlowLayoutPanel(dt);
             }
