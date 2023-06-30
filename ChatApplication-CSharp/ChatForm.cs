@@ -267,48 +267,7 @@ namespace ChatApplication_CSharp
             }
         }
 
-        //private void UpdateIdThanhVien(int nhomId, int id)
-        //{
-        //    string connectionString = "Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True"; // Thay thế bằng chuỗi kết nối của bạn
 
-        //    using (SqlConnection connection = new SqlConnection(connectionString))
-        //    {
-        //        connection.Open();
-
-        //        string selectQuery = "SELECT id_thanh_vien FROM [Group] WHERE id_nhom = @nhomId";
-        //        SqlCommand selectCommand = new SqlCommand(selectQuery, connection);
-        //        selectCommand.Parameters.AddWithValue("@nhomId", nhomId);
-        //        SqlDataReader reader = selectCommand.ExecuteReader();
-
-        //        if (reader.Read())
-        //        {
-        //            string idThanhVien = reader["id_thanh_vien"].ToString();
-
-        //            // Tách các giá trị trong id_thanh_vien thành mảng
-        //            string[] idThanhVienArray = idThanhVien.Split(',');
-
-        //            // Tạo danh sách mới chứa các giá trị khác id
-        //            List<string> newIdThanhVienList = new List<string>();
-        //            foreach (string value in idThanhVienArray)
-        //            {
-        //                if (value != id.ToString())
-        //                {
-        //                    newIdThanhVienList.Add(value);
-        //                }
-        //            }
-
-        //            // Cập nhật lại trường id_thanh_vien trong bảng Group
-        //            string newIdThanhVien = string.Join(",", newIdThanhVienList.ToArray());
-        //            string updateQuery = "UPDATE [Group] SET id_thanh_vien = @newIdThanhVien WHERE id_nhom = @nhomId";
-        //            SqlCommand updateCommand = new SqlCommand(updateQuery, connection);
-        //            updateCommand.Parameters.AddWithValue("@newIdThanhVien", newIdThanhVien);
-        //            updateCommand.Parameters.AddWithValue("@nhomId", nhomId);
-        //            updateCommand.ExecuteNonQuery();
-        //        }
-
-        //        reader.Close();
-        //    }
-        //}
 
         private DataTable GetAllMessages(int senderId, int receiverId)
         {
@@ -956,7 +915,7 @@ namespace ChatApplication_CSharp
 
         private void btnDetailGroup_Click(object sender, EventArgs e)
         {
-            GroupDetail group = new GroupDetail(group_id.ToString());
+            GroupDetail group = new GroupDetail(group_id.ToString(), id.ToString());
             group.Show();
             group.BringToFront();
         }

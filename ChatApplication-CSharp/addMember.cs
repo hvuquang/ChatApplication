@@ -16,7 +16,7 @@ namespace ChatApplication_CSharp
     public partial class addMember : Form
     {
         private int id;
-        public string userIDs;
+        public string[] userIDs;
         public string userInGroupWithcomma;
         private string groupID;
         private string temp;
@@ -59,7 +59,7 @@ namespace ChatApplication_CSharp
             this.id = id;
         }
 
-        public addMember(string userID, string userInGroupWithcomma, string groupID)
+        public addMember(string[] userID, string userInGroupWithcomma, string groupID)
         {
             InitializeComponent();
             this.userIDs = userID;
@@ -141,6 +141,7 @@ namespace ChatApplication_CSharp
                 {
                     temp = userInGroupWithcomma;
                     temp += "," + userId;
+                    MessageBox.Show(temp);
                     selectedIds.Add(userId);
                     selectedItem.BackColor = Color.LightBlue; // Đặt màu nền của dòng đã chọn
                 }

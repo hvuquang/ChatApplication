@@ -39,12 +39,14 @@
             this.email = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.delete = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.btnAddMember = new System.Windows.Forms.Button();
+            this.btnOut = new System.Windows.Forms.Button();
+            this.btnXoa = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
             // 
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(84)))), ((int)(((byte)(163)))));
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
             this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -75,7 +77,7 @@
             this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView1.RowTemplate.DividerHeight = 2;
             this.dataGridView1.RowTemplate.Height = 40;
-            this.dataGridView1.Size = new System.Drawing.Size(746, 225);
+            this.dataGridView1.Size = new System.Drawing.Size(746, 445);
             this.dataGridView1.TabIndex = 1;
             // 
             // image
@@ -113,7 +115,7 @@
             this.btnAddMember.BackColor = System.Drawing.Color.White;
             this.btnAddMember.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddMember.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddMember.Location = new System.Drawing.Point(464, 394);
+            this.btnAddMember.Location = new System.Drawing.Point(669, 575);
             this.btnAddMember.Name = "btnAddMember";
             this.btnAddMember.Size = new System.Drawing.Size(110, 53);
             this.btnAddMember.TabIndex = 6;
@@ -121,15 +123,44 @@
             this.btnAddMember.UseVisualStyleBackColor = false;
             this.btnAddMember.Click += new System.EventHandler(this.btnAddMember_Click);
             // 
+            // btnOut
+            // 
+            this.btnOut.BackColor = System.Drawing.Color.White;
+            this.btnOut.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOut.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOut.Location = new System.Drawing.Point(785, 575);
+            this.btnOut.Name = "btnOut";
+            this.btnOut.Size = new System.Drawing.Size(110, 53);
+            this.btnOut.TabIndex = 7;
+            this.btnOut.Text = "Rời nhóm";
+            this.btnOut.UseVisualStyleBackColor = false;
+            this.btnOut.Click += new System.EventHandler(this.btnOut_Click);
+            // 
+            // btnXoa
+            // 
+            this.btnXoa.BackColor = System.Drawing.Color.White;
+            this.btnXoa.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnXoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnXoa.Location = new System.Drawing.Point(553, 575);
+            this.btnXoa.Name = "btnXoa";
+            this.btnXoa.Size = new System.Drawing.Size(110, 53);
+            this.btnXoa.TabIndex = 8;
+            this.btnXoa.Text = "Xóa";
+            this.btnXoa.UseVisualStyleBackColor = false;
+            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
+            // 
             // GroupDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::ChatApplication_CSharp.Properties.Resources._9;
             this.ClientSize = new System.Drawing.Size(1060, 687);
+            this.Controls.Add(this.btnXoa);
+            this.Controls.Add(this.btnOut);
             this.Controls.Add(this.btnAddMember);
             this.Controls.Add(this.dataGridView1);
             this.Name = "GroupDetail";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "GroupDetail";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
@@ -143,5 +174,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn username;
         private System.Windows.Forms.DataGridViewTextBoxColumn email;
         private System.Windows.Forms.DataGridViewCheckBoxColumn delete;
+        private System.Windows.Forms.Button btnOut;
+        private System.Windows.Forms.Button btnXoa;
     }
 }
