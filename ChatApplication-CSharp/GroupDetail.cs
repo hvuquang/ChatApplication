@@ -31,7 +31,6 @@ namespace ChatApplication_CSharp
             loadUserInGroup();
             getUserInGroup();
             readUserData();
-            label1.Text = userID;
         }
 
         private void loadUserInGroup()
