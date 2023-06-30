@@ -581,6 +581,35 @@ namespace ChatApplication_CSharp
                 DataTable messageTable = GetAllMessages(id, receiver);
                 
                 DisplayMessagesInFlowLayoutPanel(messageTable);
+
+
+
+                //test
+                //byte[] b = ImageToByteArray(flowLayoutPanel1.BackgroundImage);
+                //SqlConnection connection = new SqlConnection("Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True");
+                SqlConnection connection = new SqlConnection("Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True");
+                connection.Open();
+                SqlCommand cmd1 = new SqlCommand("select * from [Background] where (id_nguoi1 = @id and id_nguoi2 = @receiver) or (id_nguoi2 = @id and id_nguoi1 = @receiver)", connection);
+                cmd1.Parameters.AddWithValue("@id", id);
+                cmd1.Parameters.AddWithValue("@receiver", receiver);
+                using (SqlDataReader reader = cmd1.ExecuteReader())
+                {
+                    if (!reader.HasRows)
+                    {
+                        return;
+                    }
+                    while (reader.Read())
+                    {
+                        // Access and process the retrieved data
+                        //ID1 = (string)reader["hinh_anh"].ToString();
+                        byte[] imageBytes = (byte[])reader["hinh_anh"];
+                        Image image = ConvertByteArrayToImage(imageBytes);
+                        flowLayoutPanel1.BackgroundImage = image;
+                        //flowLayoutPanel1.Layout
+                    }
+                    reader.Close();
+                }
+
             }
         }
 
@@ -772,6 +801,7 @@ namespace ChatApplication_CSharp
 
         private void txtMessage_KeyDown(object sender, KeyEventArgs e)
         {
+
             if (e.KeyCode == Keys.Enter)
             {
                  button1_Click(sender, e);
@@ -781,7 +811,7 @@ namespace ChatApplication_CSharp
         private void btnChangeScreen_Click(object sender, EventArgs e)
         {
             //flowLayoutPanel1.BackColor = Color.Black;
-
+            string ID1 = "";
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.InitialDirectory = "C:\\";
             openFileDialog.Filter = "Image Files (*.jpg; *.png; *.gif)|*.jpg;*.png;*.gif";
@@ -792,18 +822,51 @@ namespace ChatApplication_CSharp
             }
             //if(modeChat == "single")
             //{
-            //    byte[] b = ImageToByteArray(flowLayoutPanel1.BackgroundImage);
-            //    SqlConnection connection = new SqlConnection("Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True");
-            //    //SqlConnection connection = new SqlConnection("Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True");
-            //    connection.Open();
-            //    SqlCommand cmd = new SqlCommand("insert into [Background] values (@id_nguoi1 , @id_nguoi2 , @id_group , @hinh_anh)", connection);
-            //    cmd.Parameters.AddWithValue("@id_nguoi1", id);
-            //    cmd.Parameters.AddWithValue("@id_nguoi2", receiver);
-            //    cmd.Parameters.AddWithValue("@id_group", 0);
-            //    cmd.Parameters.AddWithValue("@hinh_anh", b);
-            //    cmd.ExecuteNonQuery();
-            //    connection.Close();
-            //    MessageBox.Show("Đổi background thành công");
+            byte[] b = ImageToByteArray(flowLayoutPanel1.BackgroundImage);
+            //SqlConnection connection = new SqlConnection("Data Source=LAPTOP-HFM62E22\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True");
+            SqlConnection connection = new SqlConnection("Data Source=VUQUANGHUY\\SQLEXPRESS;Initial Catalog=chatDB;Integrated Security=True");
+            connection.Open();
+            SqlCommand cmd = new SqlCommand("insert into [Background] values (@id_nguoi1 , @id_nguoi2, @id_group , @hinh_anh)", connection);
+            SqlCommand cmd1 = new SqlCommand("select * from [Background] where (id_nguoi1 = @id and id_nguoi2 = @receiver) or (id_nguoi2 = @id and id_nguoi1 = @receiver)", connection);
+            SqlCommand cmd2 = new SqlCommand("UPDATE [Background] SET hinh_anh=@b WHERE (id_nguoi1 = @id and id_nguoi2 = @receiver) or (id_nguoi2 = @id and id_nguoi1 = @receiver)", connection);
+            cmd1.Parameters.AddWithValue("@id", id);
+            cmd1.Parameters.AddWithValue("@receiver", receiver);
+            using (SqlDataReader reader = cmd1.ExecuteReader())
+            {
+                if (!reader.HasRows)
+                {
+                    //MessageBox.Show("No data found");
+                    reader.Close();
+                    cmd.Parameters.AddWithValue("@id_nguoi1", id);
+                    cmd.Parameters.AddWithValue("@id_nguoi2", receiver);
+                    cmd.Parameters.AddWithValue("@id_group", 0);
+                    cmd.Parameters.AddWithValue("@hinh_anh", b);
+                    cmd.ExecuteNonQuery();
+                    connection.Close();
+                    MessageBox.Show("Đổi background thành công");
+                    return;
+                }
+                else
+                {
+                    reader.Close();
+                    cmd2.Parameters.Add("@b", b);
+                    cmd2.Parameters.AddWithValue("@id", id);
+                    cmd2.Parameters.AddWithValue("@receiver", receiver);
+                    cmd2.ExecuteNonQuery();
+                }
+                reader.Close();
+            }
+            connection.Close();
+            return;
+
+
+            cmd.Parameters.AddWithValue("@id_nguoi1", id);
+            cmd.Parameters.AddWithValue("@id_nguoi2", receiver);
+            //cmd.Parameters.AddWithValue("@id_group", 0);
+            cmd.Parameters.AddWithValue("@hinh_anh", b);
+            cmd.ExecuteNonQuery();
+            connection.Close();
+            MessageBox.Show("Đổi background thành công");
             //}
         }
 

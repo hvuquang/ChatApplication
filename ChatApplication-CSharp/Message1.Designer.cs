@@ -52,6 +52,7 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.BackColor = System.Drawing.Color.White;
             this.pictureBox1.Image = global::ChatApplication_CSharp.Properties.Resources.avt;
             this.pictureBox1.Location = new System.Drawing.Point(14, 12);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
@@ -86,9 +87,10 @@
             // 
             this.lbMessage.AutoSize = true;
             this.lbMessage.BackColor = System.Drawing.SystemColors.Control;
+            this.lbMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbMessage.Location = new System.Drawing.Point(79, 33);
             this.lbMessage.Name = "lbMessage";
-            this.lbMessage.Size = new System.Drawing.Size(35, 13);
+            this.lbMessage.Size = new System.Drawing.Size(46, 17);
             this.lbMessage.TabIndex = 5;
             this.lbMessage.Text = "label2";
             // 

@@ -69,14 +69,15 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "label1";
             // 
-            // pdfFile
+            // pdfFile1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btnFileName);
-            this.Name = "pdfFile";
+            this.Name = "pdfFile1";
             this.Size = new System.Drawing.Size(589, 83);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

@@ -41,6 +41,7 @@
             this.btnLike.BackColor = System.Drawing.Color.Transparent;
             this.btnLike.BackgroundImage = global::ChatApplication_CSharp.Properties.Resources.like;
             this.btnLike.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnLike.FlatAppearance.BorderSize = 0;
             this.btnLike.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLike.ForeColor = System.Drawing.Color.Transparent;
             this.btnLike.Location = new System.Drawing.Point(48, 3);
@@ -55,6 +56,7 @@
             this.btnLaugh.BackColor = System.Drawing.Color.Transparent;
             this.btnLaugh.BackgroundImage = global::ChatApplication_CSharp.Properties.Resources.laughing;
             this.btnLaugh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnLaugh.FlatAppearance.BorderSize = 0;
             this.btnLaugh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLaugh.ForeColor = System.Drawing.Color.Transparent;
             this.btnLaugh.Location = new System.Drawing.Point(95, 3);
@@ -69,6 +71,7 @@
             this.btnHeart.BackColor = System.Drawing.Color.Transparent;
             this.btnHeart.BackgroundImage = global::ChatApplication_CSharp.Properties.Resources.heart;
             this.btnHeart.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnHeart.FlatAppearance.BorderSize = 0;
             this.btnHeart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnHeart.ForeColor = System.Drawing.Color.Transparent;
             this.btnHeart.Location = new System.Drawing.Point(4, 3);
