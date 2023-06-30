@@ -55,3 +55,5 @@ C:\Users\HP\Documents\GitHub\ChatApplication\ChatApplication-CSharp\obj\Debug\Ch
 C:\Users\HP\Documents\GitHub\ChatApplication\ChatApplication-CSharp\obj\Debug\ChatApplication-CSharp.csproj.CopyComplete
 C:\Users\HP\Documents\GitHub\ChatApplication\ChatApplication-CSharp\obj\Debug\ChatApplication-CSharp.exe
 C:\Users\HP\Documents\GitHub\ChatApplication\ChatApplication-CSharp\obj\Debug\ChatApplication-CSharp.pdb
+C:\Users\HP\Documents\GitHub\ChatApplication\ChatApplication-CSharp\obj\Debug\ChatApplication_CSharp.GroupDetail.resources
+C:\Users\HP\Documents\GitHub\ChatApplication\ChatApplication-CSharp\obj\Debug\ChatApplication_CSharp.addMember.resources

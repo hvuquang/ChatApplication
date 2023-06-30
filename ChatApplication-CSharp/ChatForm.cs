@@ -36,7 +36,7 @@ namespace ChatApplication_CSharp
         {
             timer = new Timer();
             timer.Interval = pollingInterval;
-            //timer.Tick += Timer_Tick;
+            timer.Tick += Timer_Tick;
         }
         public ChatForm(int id)
         {
@@ -535,6 +535,7 @@ namespace ChatApplication_CSharp
             DisplayGroupsInDataGridView(dtGroup);
             //DisplayBackgroundImage(id, receiver);
             GetRowById(id);
+            btnDetailGroup.Visible = false;
         }
 
         private void LoadLatestMessages()
@@ -551,16 +552,11 @@ namespace ChatApplication_CSharp
                 lastMessageGroupTable = currentGroupTable;
                 DisplayMessagesInFlowLayoutPanel(lastMessageGroupTable);
             }
-            DataTable currentGroup = GetAllGroups();
-            if (lastGroupTable == null || !lastGroupTable.Rows.Cast<DataRow>().SequenceEqual(currentGroup.Rows.Cast<DataRow>(), DataRowComparer.Default))
-            {
-                lastGroupTable = currentGroup;
-                DisplayGroupsInDataGridView(lastGroupTable);
-            }
         }
 
         private void Timer_Tick(object sender, EventArgs e)
         {
+            //MessageBox.Show("Run");
             flowLayoutPanel1.SuspendLayout();
             LoadLatestMessages();
             flowLayoutPanel1.ResumeLayout();
@@ -571,6 +567,8 @@ namespace ChatApplication_CSharp
         {
             if (e.RowIndex >= 0)
             {
+                flowLayoutPanel1.BackgroundImage = null;
+                btnDetailGroup.Visible = false;
                 modeChat = "single";
                 DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
                 string idString = row.Cells["ID"].Value.ToString();
@@ -836,6 +834,7 @@ namespace ChatApplication_CSharp
                 if (!reader.HasRows)
                 {
                     //MessageBox.Show("No data found");
+                    //flowLayoutPanel1.BackgroundImage = null;
                     reader.Close();
                     cmd.Parameters.AddWithValue("@id_nguoi1", id);
                     cmd.Parameters.AddWithValue("@id_nguoi2", receiver);
@@ -858,16 +857,6 @@ namespace ChatApplication_CSharp
             }
             connection.Close();
             return;
-
-
-            cmd.Parameters.AddWithValue("@id_nguoi1", id);
-            cmd.Parameters.AddWithValue("@id_nguoi2", receiver);
-            //cmd.Parameters.AddWithValue("@id_group", 0);
-            cmd.Parameters.AddWithValue("@hinh_anh", b);
-            cmd.ExecuteNonQuery();
-            connection.Close();
-            MessageBox.Show("Đổi background thành công");
-            //}
         }
 
         byte[] ImageToByteArray(Image img)
@@ -913,6 +902,7 @@ namespace ChatApplication_CSharp
         {
             if (e.RowIndex >= 0)
             {
+                btnDetailGroup.Visible = true;
                 modeChat = "multi";
                 DataGridViewRow row = dataGridView2.Rows[e.RowIndex];
                 string idString = row.Cells["id_nhom"].Value.ToString();
@@ -962,6 +952,13 @@ namespace ChatApplication_CSharp
             //        e.Value = ResizeImage(image, 50, 50);
             //    }
             //}
+        }
+
+        private void btnDetailGroup_Click(object sender, EventArgs e)
+        {
+            GroupDetail group = new GroupDetail(group_id.ToString());
+            group.Show();
+            group.BringToFront();
         }
     }
 }

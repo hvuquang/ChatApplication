@@ -56,6 +56,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="addMember.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="addMember.Designer.cs">
+      <DependentUpon>addMember.cs</DependentUpon>
+    </Compile>
     <Compile Include="addGroup.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -97,6 +103,12 @@
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GroupDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GroupDetail.Designer.cs">
+      <DependentUpon>GroupDetail.cs</DependentUpon>
     </Compile>
     <Compile Include="ImageMessage1.cs">
       <SubType>UserControl</SubType>
@@ -167,6 +179,9 @@
     <Compile Include="SettingForm.Designer.cs">
       <DependentUpon>SettingForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="addMember.resx">
+      <DependentUpon>addMember.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="addGroup.resx">
       <DependentUpon>addGroup.cs</DependentUpon>
     </EmbeddedResource>
@@ -187,6 +202,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GroupDetail.resx">
+      <DependentUpon>GroupDetail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ImageMessage1.resx">
       <DependentUpon>ImageMessage1.cs</DependentUpon>
