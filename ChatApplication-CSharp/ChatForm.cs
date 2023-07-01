@@ -431,7 +431,7 @@ namespace ChatApplication_CSharp
                         }
                         if (row["AudioLink"].ToString() != "")
                         {
-                            AudioFile1 audioFile = new AudioFile1(row["AudioLink"].ToString());
+                            AudioFile1 audioFile = new AudioFile1(row["AudioLink"].ToString(), "", messageID);
                             flowLayoutPanel1.Controls.Add(audioFile);
                         }
                         if (row["FileLink"].ToString() != "")
@@ -493,7 +493,7 @@ namespace ChatApplication_CSharp
                         {
                             if (row["img"].ToString() != "")
                             {
-                                ImageMessage1 imageMessage = new ImageMessage1();
+                                ImageMessage1 imageMessage = new ImageMessage1("group", messageID);
                                 imageData = (byte[])row["img"];
                                 image = ConvertByteArrayToImage(imageData);
                                 imageMessage.pictureBox1.Image = image;
@@ -501,12 +501,12 @@ namespace ChatApplication_CSharp
                             }
                             if (row["AudioLink"].ToString() != "")
                             {
-                                AudioFile1 audioFile = new AudioFile1(row["AudioLink"].ToString());
+                                AudioFile1 audioFile = new AudioFile1(row["AudioLink"].ToString(), "group", messageID);
                                 flowLayoutPanel1.Controls.Add(audioFile);
                             }
                             if (row["FileLink"].ToString() != "")
                             {
-                                pdfFile1 pdfFile = new pdfFile1(row["FileLink"].ToString());
+                                pdfFile1 pdfFile = new pdfFile1(row["FileLink"].ToString(), "group", messageID);
                                 flowLayoutPanel1.Controls.Add(pdfFile);
                             }
                         }

@@ -16,5 +16,11 @@ namespace ChatApplication_CSharp
         {
             InitializeComponent();
         }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            BigImage big = new BigImage(pictureBox1.Image);
+            big.Show();
+        }
     }
 }

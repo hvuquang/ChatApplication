@@ -30,9 +30,9 @@
         {
             this.lbMessage1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.reactMessage1 = new ChatApplication_CSharp.ReactMessage();
             this.label1 = new System.Windows.Forms.Label();
             this.lbMessage = new System.Windows.Forms.Label();
+            this.reactMessage1 = new ChatApplication_CSharp.ReactMessage();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -62,15 +62,6 @@
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
             // 
-            // reactMessage1
-            // 
-            this.reactMessage1.BackColor = System.Drawing.Color.White;
-            this.reactMessage1.Location = new System.Drawing.Point(575, 78);
-            this.reactMessage1.Name = "reactMessage1";
-            this.reactMessage1.Size = new System.Drawing.Size(137, 27);
-            this.reactMessage1.TabIndex = 3;
-            this.reactMessage1.Visible = false;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -93,6 +84,15 @@
             this.lbMessage.Size = new System.Drawing.Size(46, 17);
             this.lbMessage.TabIndex = 5;
             this.lbMessage.Text = "label2";
+            // 
+            // reactMessage1
+            // 
+            this.reactMessage1.BackColor = System.Drawing.Color.White;
+            this.reactMessage1.Location = new System.Drawing.Point(575, 78);
+            this.reactMessage1.Name = "reactMessage1";
+            this.reactMessage1.Size = new System.Drawing.Size(137, 27);
+            this.reactMessage1.TabIndex = 3;
+            this.reactMessage1.Visible = false;
             // 
             // Message1
             // 

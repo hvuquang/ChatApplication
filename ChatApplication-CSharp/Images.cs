@@ -53,7 +53,7 @@ namespace ChatApplication_CSharp
                     imageData = (byte[])row["img"];
                     image = ConvertByteArrayToImage(imageData);
                     imageMessage.Image = image;
-                    imageMessage.Size = new Size(300, 300);
+                    imageMessage.Size = new Size(259, 259);
                     BigImage bigImage = new BigImage(image);
                     imageMessage.Click += (sender,e) => ImageMessage_Click(sender,e , bigImage);
                     //bigImage = new BigImage(image);

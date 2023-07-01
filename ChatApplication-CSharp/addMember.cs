@@ -111,7 +111,7 @@ namespace ChatApplication_CSharp
             OpenFileDialog open = new OpenFileDialog();
             if(open.ShowDialog()== DialogResult.OK)
             {
-                pictureBox1.Image = Image.FromFile(open.FileName);
+                //pictureBox1.Image = Image.FromFile(open.FileName);
             }
         }
 

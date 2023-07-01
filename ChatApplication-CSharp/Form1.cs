@@ -49,8 +49,14 @@ namespace ChatApplication_CSharp
             label2.ForeColor = Color.White;
             panel2.BackColor = Color.White;
             label1.ForeColor = Color.FromArgb(70, 84, 163);
+            //this.Hide();
             LoginUC login = new LoginUC();
             addLoginUC(login);
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
